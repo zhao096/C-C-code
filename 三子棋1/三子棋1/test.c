@@ -2,6 +2,10 @@
 #include"game.h"
 void game()
 {
+	while (getchar() != '\n')
+	{
+		;
+	}
 	char re = 0;//声明存储是否赢了的标志
 	char arr[ROW][COL] = {0};
 	init(arr, ROW, COL);
