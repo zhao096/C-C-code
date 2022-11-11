@@ -2,21 +2,21 @@
 #include<stdio.h>
 int main()
 {
-	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
-	int k = 1;
+	int arr[] = { 13,15,16,20,24,30,35,80,81,99 };
+	int k = 15;
 	int a = 0;
 	int l = 0;
 	int r = sizeof(arr) / sizeof(arr[0]) - 1;
-	while (l < r)//注意此处不要用 <= 因为如果这样的话当k<0时将会死循环因为k<0将一直arr[0] = 1 ,而mid = 1 + 1 / 2 = 1 //r = mid - 1 = 0无限循环  
+	while (l <= r)//
 	{
-		int mid = (arr[l] + arr[r]) / 2;
-		if (k < mid)
+		int mid = (l + r) / 2;
+		if (k < arr[mid])
 			r = mid - 1;
-		else if (k > mid)
+		else if (k > arr[mid])
 			l = mid + 1;
 		else
 		{
-			printf("找到了他是:%d\n", mid);
+			printf("找到了他是:%d\n", arr[mid]);
 			a = 1;
 			break;
 		}
