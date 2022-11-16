@@ -13,5 +13,7 @@ int main()
 	int num = 0;
 	scanf("%d", &num);
 	Tower('A','B','C', num);
+	//A B为辅助柱，A也是起始柱
+	//C为目标柱
 	return 0;
 }
