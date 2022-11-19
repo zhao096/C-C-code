@@ -38,19 +38,64 @@
 //	return 0;
 //}
 
-//
-//int NumberOf1_low(int n)
+
+//int numberof1_low(int n)
 //{
 //	int count = 0;
-//	int flag = 1;
-//	while (flag != 0)//当flag == 0 时说明已经左移动了32次测完了n的二进制序列
+//	int i = 0;
+//	for (i = 0; i < 32;i++ )//当flag == 0 时说明已经左移动了32次测完了n的二进制序列
 //	{
-//		if(n & flag)//n & flag “&”一假则假,一位一位的测，若有1则为真进入，否则为0不进
+//		if(((n >> i) & 1 )== 1)//n & flag “&”一假则假,一位一位的测，若有1则为真进入，否则为0不进
 //		count++;
-//		flag <<= 1; //测每一位
 //	}
 //	return count;
 //
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int k = numberof1_low(n);
+//	printf("%d", k);
+//	return 0;
+//}
+//
+void print(int n)
+{
+	printf("偶数数位:");
+	for (int i = 30; i >= 0 ; i-=2)
+	{
+		printf("%d", (n >> i) & 1);
+	}
+	printf("\n");
+	printf("奇数数位:");
+	for (int i = 31; i >= 1; i -= 2)
+	{
+		printf("%d", (n >> i) & 1);
+	}
+}
+
+
+int main()
+{
+	int n = 0;
+	scanf("%d", &n);
+	print(n);
+	
+	return 0;
+}
+
+//int NumberOf1_low(unsigned int n)//把-1看成一个32个1的二进制
+//{
+//	int count = 0;
+//	while (n)
+//	{
+//		if (n % 2 == 1)//
+//			count++;
+//		n = n / 2;
+//	}
+//	return count;
 //}
 //
 //int main()
@@ -61,44 +106,28 @@
 //	printf("%d", k);
 //	return 0;
 //}
-//int NumberOf1_low(int n)
+//int numberof1_low(int n)
 //{
 //	int count = 0;
-//	int flag = 1;
-//	while (flag != 0)
+//	while (n)
 //	{
-//		if ((n & flag) != 0)//注这里后面可不是1，他会越来愈大
-//		{
-//			count++;
-//		}
-//		flag <<= 1;
+//		n = n & (n - 1);//取走末尾的一个1，当全部取完将变成0
+//		count++;
 //	}
 //	return count;
-//}
 //
+//}
 //
 //int main()
 //{
 //	int n = 0;
 //	scanf("%d", &n);
-//	int k = NumberOf1_low(n);
-//	n = 32 - k;
-//	for (; k > 0; k--)
-//	{
-//		printf("%d", 1);
-//
-//	}
-//	printf("\n");
-//	for (; n > 0; n--)
-//	{
-//		printf("%d", 0);
-//
-//	}
+//	int k = numberof1_low(n);
+//	printf("%d", k);
 //	return 0;
 //}
 
 
-N
 
 
 
