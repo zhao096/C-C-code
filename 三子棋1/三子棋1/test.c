@@ -15,7 +15,7 @@ void game()
 		play_move(arr, ROW, COL);
 		print(arr, ROW, COL);
 		/*printf("µçÄÔ×ß\n");*/
-		/*Sleep(2000);*/
+		Sleep(2000);
 		re = is_win(arr, ROW, COL);
 		if (re != 'Q')
 		{
@@ -58,6 +58,7 @@ void mnue()
 
 int main()
 {
+	srand((unsigned int)time(NULL));
 	int input = 0;
 	do
 	{

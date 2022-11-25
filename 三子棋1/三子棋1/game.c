@@ -99,17 +99,83 @@ void play_move(char arr[][COL], int r, int c)
 void comput_move(char arr[][COL], int r, int c)
 {
 	printf("电脑走\n");
-	while (1)
+	int i = 0;
+	int j = 0;
+	for (j = 0; j < r; j++)
 	{
-		int x = rand() % c;
-		int y = rand() % r;
-		if (arr[x][y] == ' ')
+		while (1)
 		{
-			arr[x][y] = 'X';
-			break;
-		}
-	}
+			int x = rand() % c;
+			int y = rand() % r;
+			if (arr[j][i] == arr[j][i + 1] == 'O' || arr[j][i + 1] == arr[j][i + 2] == 'O' || arr[j][i + 2] == arr[j][i] == 'O')//某一行有两两相等的玩家子
+			{
+					if (arr[j][y] == ' ')
+					{
+						arr[j][y] = 'X';
+						goto finish;
+					}
+			}
+			if (arr[i][j] == arr[i+1][j] == 'O' || arr[i+1][j] == arr[i+2][j] == 'O' || arr[i+2][j] == arr[i][j] == 'O')//某一lie有两两相等的玩家子
+			{
+				if (arr[j][y] == ' ')
+				{
+					arr[x][j] = 'X';
+					goto finish;
 
+				}
+			}
+
+			if (arr[0][0] == arr[1][1] == 'O' || arr[1][1] == arr[2][2] == 'O' || arr[0][0] == arr[2][2] == 'O ')
+			{
+				if (arr[0][0] == ' ')
+				{
+					arr[0][0] = 'X';
+					goto finish;
+
+				}
+				if (arr[1][1] == ' ')
+				{
+					arr[1][1] = 'X';
+					goto finish;
+
+				}
+				if (arr[2][2] == ' ')
+				{
+					arr[2][2] = 'X';
+					goto finish;
+
+				}
+			}
+
+			if (arr[1][2] == arr[1][1]  == 'O' || arr[3][1] == arr[1][1] == 'O' ||  arr[1][2] == arr[3][1] ==  'O ')
+			{
+					if (arr[1][2] == ' ')
+					{
+						arr[1][2] = 'X';
+						goto finish;
+
+					}
+					if (arr[1][1] == ' ')
+					{
+						arr[1][1] = 'X';
+						goto finish;
+
+					}
+					if (arr[3][1] == ' ')
+					{
+						arr[3][1] = 'X';
+						goto finish;
+
+					}
+			}
+
+				
+		}
+
+
+	}
+finish:
+	;
 }
 
 char is_win(char arr[][COL], int r, int c)
