@@ -18,9 +18,7 @@ int main()
 		{
 			if (arr[j] > arr[j + 1])//冒泡排序中的第二个循环
 			{
-				//int tmp = arr[j];
-				//arr[j] = arr[j + 1];
-				//arr[j + 1] = tmp;
+
 				count = 1;
 			}
 		}
