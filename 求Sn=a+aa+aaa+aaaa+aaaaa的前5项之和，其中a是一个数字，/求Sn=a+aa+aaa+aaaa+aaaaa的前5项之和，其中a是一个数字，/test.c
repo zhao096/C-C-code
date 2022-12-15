@@ -7,13 +7,14 @@ int main()
 	scanf("%d", &a);
 	int n = a;
 	int count = 10;
-	while (a / 10)
+	while (n / 10)
 	{
 		count *= 10;
+		n /= 10;
 	}
-	int sum = 2;
-	int tmp = 2;
-	for (i = 0; i < 4; i++)//注意i<4，而不是i<5,S1并没有在循环内进行
+	int sum = 0;
+	int tmp = 0;
+	for (i = 0; i < 5; i++)
 	{	
 		tmp = (n + (tmp * count));
 		sum += tmp;
