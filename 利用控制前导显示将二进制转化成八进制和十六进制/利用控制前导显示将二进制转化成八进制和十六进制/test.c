@@ -2,6 +2,11 @@
 #include<stdio.h>
 int main()
 {
-	printf("%#o %#x", 1234,1234);
+	printf("%o %x", 1234,1234);
+	return 0;
+}
+int main()
+{
+	printf("%#o %#x", 1234, 1234);
 	return 0;
 }
