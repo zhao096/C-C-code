@@ -29,6 +29,10 @@ int sort_name (const void* e1, const void* e2)
 }
 
 
+
+
+
+
 void str(void)
 {
 	struct Stu student[2] = { {18,"zihua"},{19,"lhansan"} };
