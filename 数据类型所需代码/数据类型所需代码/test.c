@@ -39,11 +39,23 @@
 //	return 0;
 //
 //}
+//int main()
+//{
+//	char a = -1;
+//	unsigned char b = -1;
+//	signed char c = -1;
+//	printf("%d %d %d", a, b, c);
+//	return 0;
+//}
 int main()
 {
-	char a = -1;
-	unsigned char b = -1;
-	signed char c = -1;
-	printf("%d %d %d", a, b, c);
-	return 0;
+    float a = 5.5f;
+    //  101.1
+    // s = 0 ; m = 1.011 ; e = 2
+    // s直接存 ； e加上127(2+127 == 129) ；先去掉1. 再将011存进后面剩余的补0
+    // 0 1000 0001 011 0000000000 0000000000
+    // 0100 0000 1011 0000 0000 0000 0000 0000
+    // 40     b0   00    00
+    //vs是小端即为 00 00 b0 40
+    return 0;
 }
