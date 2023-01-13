@@ -109,22 +109,73 @@
 //	return 0;
 //}
 
-void test(int(*p)[4], int r, int c)
-{
-	int i = 0;
-	for (i = 0 ;i < r; i++)
-	{
-		int j = 0; 
-		for (j = 0; j < c; j++)
-		{
-			printf("%d", (*(p + i))[j]);
-		}
-		printf("\n");
-	}
+//void test(int(*p)[4], int r, int c)
+//{
+//	int i = 0;
+//	for (i = 0 ;i < r; i++)
+//	{
+//		int j = 0; 
+//		for (j = 0; j < c; j++)
+//		{
+//			printf("%d", (*(p + i))[j]);
+//		}
+//		printf("\n");
+//	}
+//
+//}
+//int main()
+//{
+//	int arr[3][4] = { {1,2,3,4},{2,3,4,5},{3,4,5,6} };
+//	test(arr, 3, 4);
+//}
 
+////一维数组情况
+//void test1(int arr[])//括号内加不加数组大小都行
+//{
+//	;
+//}
+//
+//void test1(int* parr)
+//{
+//	;
+//}
+//
+//
+//void test2(int* arr2[])
+//{
+//	;
+//}
+//
+//void test2(int** arr2)
+//{
+//
+//	;
+//}
+//
+//int main()
+//{
+//	int arr1[10] = { 0 };
+//	int* arr2[10] = { 0 };
+//	test1(arr1);
+//	test2(arr2);
+//	return 0;
+//}
+//
+//
+
+//
+void test(int **arr)
+{
+	;
 }
+//void test(int(*p)[4])
+//{
+//
+//	;
+//}
 int main()
 {
-	int arr[3][4] = { {1,2,3,4},{2,3,4,5},{3,4,5,6} };
-	test(arr, 3, 4);
+	int arr[3][4] = {0};
+	test(arr);
+	return 0;
 }
