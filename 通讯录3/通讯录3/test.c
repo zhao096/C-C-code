@@ -9,12 +9,20 @@ void menu()
 	printf("********        0.exit       ******\n");
 	printf("***********************************\n");
 }
+
+//a. 添加一个函数，在退出通讯录的时候把信息到保存到文件中
+
+//b.添加一个函数，在通讯录打开的时候，可以把文件中的信息加载到通讯录中
+
+
 int main()
 {
 	int input = 0;
 	struct contact con;//创建联系人变量
 
+	
 	Init_contact(&con);
+	
 	do
 	{
 		menu();
@@ -25,32 +33,35 @@ int main()
 		default:
 			printf("选择错误\n");
 			break;
-		case 1:
+		case Add:
 			add(&con);
 			break;
-		case 2:
+		case Del:
 			del(&con);
 			break;
-		case 3:
+		case Search:
 			search(&con);
 			break;
-		case 4:
+		case Modify:
 			modify(&con);
 			break;
-		case 5:
+		case Show:
 			show(&con);
 			break;
-		case 6:
+		case Sort:
 			sort(&con);
 			break;
-		case 0:
+		case Exit:
+			SaveContact(&con);
+			ret_memory(&con);
 			printf("退出通讯录\n");
 			break;
 		}
 
+
 	} while (input);
+
 
 
 	return 0;
 }
-

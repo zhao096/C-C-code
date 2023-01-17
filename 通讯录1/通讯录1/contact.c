@@ -7,7 +7,7 @@ int check_Peo(contact* p,char * name)
 	assert(p && name);
 	for (int i = 0; i < p->sz; i++)
 	{
-		if ((strcmp(p->date[i].name, name)) == 0)
+		if ((strcmp(p->data[i].name, name)) == 0)
 		{
 			return i;
 		}
@@ -21,7 +21,7 @@ void Init_contact(contact* p)
 {
 	assert(p);
 	p->sz = 0;
-	memset(p->date, 0, sizeof(p->date));
+	memset(p->data, 0, sizeof(p->data));
 }
 
 //增加联系人
@@ -34,15 +34,15 @@ void add(contact * p)
 		return;
 	}
 	printf("输入联系人名:>");
-	scanf("%s",p->date[p->sz].name);
+	scanf("%s",p->data[p->sz].name);
 	printf("输入联系人的年龄:>");
-	scanf("%d",&( p->date[p->sz].age));
+	scanf("%d",&( p->data[p->sz].age));
 	printf("输入联系人性别:>");
-	scanf("%s", p->date[p->sz].sex);
+	scanf("%s", p->data[p->sz].sex);
 	printf("输入联系人地址:>");
-	scanf("%s", p->date[p->sz].addr);
+	scanf("%s", p->data[p->sz].addr);
 	printf("输入联系人电话:>");
-	scanf("%s", p->date[p->sz].tele);		
+	scanf("%s", p->data[p->sz].tele);		
 	
 	p->sz++;
 }
@@ -63,7 +63,7 @@ void del(contact* p)
 	}
 	for (int i = ret; i < p->sz - 1; i++)
 	{
-		p->date[i] = p->date[i + 1];
+		p->data[i] = p->data[i + 1];
 	}
 	p->sz--;
 	printf("删除成功\n");
@@ -83,11 +83,11 @@ void show(contact* p)
 	printf("%-10s %-5s %-5s %-30s %-12s\n", "名字", "年龄", "性别", "地址", "电话");
 	for (int i = 0; i < (p->sz); i++)
 	{
-		printf("%-10s %-5d %-5s %-30s %-12s\n", p->date[i].name,
-												p->date[i].age,
-												p->date[i].sex,
-												p->date[i].addr,
-												p->date[i].tele)
+		printf("%-10s %-5d %-5s %-30s %-12s\n", p->data[i].name,
+												p->data[i].age,
+												p->data[i].sex,
+												p->data[i].addr,
+												p->data[i].tele)
 												;
 	}
 }
@@ -110,11 +110,11 @@ void search(contact* p)
 	else
 	{
 		printf("%-10s %-5s %-5s %-30s %-12s\n", "名字", "年龄", "性别", "地址", "电话");
-		printf("%-10s %-5d %-5s %-30s %-12s\n", p->date[ret].name,
-			p->date[ret].age,
-			p->date[ret].sex,
-			p->date[ret].addr,
-			p->date[ret].tele)
+		printf("%-10s %-5d %-5s %-30s %-12s\n", p->data[ret].name,
+			p->data[ret].age,
+			p->data[ret].sex,
+			p->data[ret].addr,
+			p->data[ret].tele)
 			;
 	}
 	
@@ -135,19 +135,43 @@ void modify(contact* p)
 	}
 
 	printf("此人信息:\n%-10s %-5s %-5s %-30s %-12s\n", "名字", "年龄", "性别", "地址", "电话");
-	printf("%-10s %-5d %-5s %-30s %-12s\n", p->date[ret].name, p->date[ret].age, p->date[ret].sex, p->date[ret].addr, p->date[ret].tele);
+	printf("%-10s %-5d %-5s %-30s %-12s\n", p->data[ret].name, p->data[ret].age, p->data[ret].sex, p->data[ret].addr, p->data[ret].tele);
 		
 		printf("请输入名字:>");
-		scanf("%s", p->date[ret].name);
+		scanf("%s", p->data[ret].name);
 		printf("请输入年龄:>");
-		scanf("%d", &(p->date[ret].age));
+		scanf("%d", &(p->data[ret].age));
 		printf("请输入性别:>");
-		scanf("%s", p->date[ret].sex);
+		scanf("%s", p->data[ret].sex);
 		printf("请输入地址:>");
-		scanf("%s", p->date[ret].addr);
+		scanf("%s", p->data[ret].addr);
 		printf("请输入电话:>");
-		scanf("%s", p->date[ret].tele);
+		scanf("%s", p->data[ret].tele);
 
 	
 
 }
+
+void sort(contact* p)
+{
+	int i = 0;
+	for (i = 0; i < p->sz - 1; i++)
+	{
+		int k = 0;
+		for(int j = 0 ; j < p->sz - i -1 ;j++)
+		if (strcmp(p->data[j].name, p->data[j + 1].name) > 0)
+		{
+			p->data[p->sz + 1] = p->data[j];
+			p->data[j] = p->data[j + 1];
+			p->data[j + 1] = p->data[p->sz + 1];
+			k = 1;
+		}
+		if (k == 0)
+		{
+			break;
+		}
+	}
+	printf("排序成功\n");
+}
+
+
