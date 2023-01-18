@@ -164,18 +164,79 @@
 //
 
 //
-void test(int **arr)
-{
-	;
-}
-//void test(int(*p)[4])
+//void test(int **arr)
 //{
-//
 //	;
 //}
+////void test(int(*p)[4])
+////{
+////
+////	;
+////}
+//int main()
+//{
+//	int arr[3][4] = {0};
+//	test(arr);
+//	return 0;
+//}
+
+//void test(int* p)
+//{
+//	;//code
+//}
+//
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7 };
+//	int* p = arr;
+//	test(p);
+//	return 0;
+//}
+
+//void test(int** ptr)
+//{
+//	;//code
+//} 
+//
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7 };
+//	int* p = arr;
+//	int** pa = &p;
+//	test(pa);
+//	test(&p);
+//	return 0;
+//}
+
+int Add(int x, int y)
+{
+	return x + y;
+}
+
 int main()
 {
-	int arr[3][4] = {0};
-	test(arr);
+	int a = 3;
+	int b = 2;
+	Add(a, b);
+	//函数指针 类型+ * + 变量名 = 函数的地址
+	//此处Add的类型为 int (int , int)
+	int (*ptr)(int, int) = &Add;
+	//上下一样  即：&Add == Add
+	int (*ptr)(int, int) = Add;//此处函数名和数组名类似都可以表示其地址
+
+	
+	
+	int ret = Add(a, b);
+	// 等于
+	int ret1 = (*ptr)(a, b);
+	// 等于 
+	int ret2 = ptr(a, b);
+	//即 Add(a,b) == (*ptr)(a,b) == ptr(a,b)
+
+
 	return 0;
 }
+
+
+
+
