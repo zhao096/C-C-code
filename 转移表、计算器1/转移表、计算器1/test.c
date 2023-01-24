@@ -42,7 +42,7 @@ int main()
 
 		int(*p[5])(int, int) = { NULL,Add,Sub,Mul,Div };
 		int (*(*pf)[5])(int, int) = &p;
-		printf("相加结果:>%d", (*pf)[1](2,3));
+		printf("相加结果:>%d", p[1](2,3));
 		/*if (input == 0)
 		{
 			printf("退出计算器\n");
