@@ -21,7 +21,7 @@ void buble_sort(void* base, size_t num, size_t width, int cmp(const void* elem1,
 		for (j = 0; j < num - i - 1; j++)//sz - 1 只需要完成总的个数再减1次
 		{
 			int ret = 0;
-			if (ret = cmp((char*)base + j * width, (char*)base + (j + 1) * width)>0)
+			if (ret = cmp((char*)base +(j * width), (char*)base + (j + 1) * width)>0)//返回大于0的数就会交换
 			{
 				swap((char*)base + j * width, (char*)base + (j + 1) * width, width);
 			}
@@ -107,6 +107,8 @@ int int_sort(const void* e1, const void* e2)
 {
 	return *(int*)e1 - *(int*)e2;//大于0则e1 > e2 ，当大于0就会交换
 }
+
+
 void it(void)
 {
 	int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
@@ -128,7 +130,7 @@ void it(void)
 //	int i = 0, j = 0;
 //	for (i = 0; i < sz; i++)
 //	{
-//		for (j = 0; j < sz - i - 1; j++)//sz - 1 只需要完成总的个数再减1次
+//		for (j = 0; j < sz - i - 1; j++)//sz - 1 只需要完成总的个数再减1次 最多可能的次数 987654321 sz - i -1
 //		{
 //			if (arr[j] > arr[j + 1])
 //			{
