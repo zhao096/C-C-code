@@ -8,8 +8,9 @@ char* my_strncpy(char* strDest, const char* strSource, size_t count)
 	assert(strDest && strSource);
 	char *ret = strDest;
 	
-	size_t i = 0;
-	for (i = 0; i < count; i++)//传count个sour进des中
+
+
+	while (count--)
 	{
 		*strDest = *strSource ;
 		if(*strSource != '\0')
@@ -21,7 +22,26 @@ char* my_strncpy(char* strDest, const char* strSource, size_t count)
 
 	return ret;
 }
-
+//char* my_strncpy(char* des, const char* sour, size_t count)
+//{
+//    assert(des && sour);
+//    char* tmp = des;
+//    while (count--)
+//    {
+//        if (*sour == '\0')
+//        {
+//            *des++ = '\0';
+//            continue;
+//        }
+//        else
+//        {
+//            *des++ = *sour++;
+//        }
+//
+//    }
+//
+//    return tmp;
+//}
 
 int main()
 {
@@ -33,7 +53,10 @@ int main()
 	
 	//printf("%s\n", strncpy(arr1, arr2,4 ));
 
-	printf("%s\n", my_strncpy(arr1, arr2, 4));
+	printf("%s\n", my_strncpy(arr1, arr2, 5));
+
+    //printf("%s\n", my_strncpy(arr1, arr2, 4));
+
 
 	
 	return 0;
