@@ -9,11 +9,14 @@ int my_strcmp(const char* string1, const char* string2)
 		string1++;
 		string2++;
 	}
-	return *string1 - *string2;
+	if ((*string1 - *string2) == 0)
+		return 0;
+	else
+	return (*string1 - *string2)>0?1:-1; //vs环境下1大于2返回1 ， 1<2 返回-1  1 = 2 返回 0
 }
 int main()
 {
-	char arr1[] = "abdef";
+	char arr1[] = "cbq";
 	char arr2[] = "abq";
 	int ret = my_strcmp(arr1, arr2);
 	if (ret > 0)

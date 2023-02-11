@@ -37,9 +37,13 @@ int check_function1(int* check,int * re_check,int sz, int num)
 void check_signaldog(int* arr, int sz)
 {
 	int* check = arr;//让他往前走查找前面的有没有重复的
+	
 	int* re_check = arr;//查找身后有没有相同的
+	
 	int* storage_addr = arr;//存储arr的起始地址
+	
 	int num = 0;
+
 	for (int i = 0; i < sz ; i++)
 	{
 		check = storage_addr;//让check每次向前一下逐一的寻找
@@ -48,6 +52,7 @@ void check_signaldog(int* arr, int sz)
 
 		//先前寻找
 		num += check_function(check,sz,num);
+
 		//在身后寻找
 		num += check_function1(check,re_check, i, num);//i == sz 要刚好不和自己相等
 
@@ -68,7 +73,10 @@ int main()
 	int arr[10] = {0 };
 	for(int i  = 0 ; i < 10 ;i++)
 	scanf("%d", &arr[i]);
+	
+	
 	int sz = sizeof(arr) / sizeof(arr[0]);
 	check_signaldog(arr, sz);
+
 	return 0;
 }

@@ -126,12 +126,59 @@
 //
 //	return 0;
 //}
+//int main()
+//{
+//	int a = 0;
+//	int* p = &a;//p中存放a的地址
+//	int** p1 = &p;//p1中存放p的地址
+//	//其用法也相同，*p找到a的地址空间，*p1找到p的地址空间也就是真正的p
+//	//而不是p的地址，再一次解应用即 * *p1 =  * p 就可以找到a
+//	return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//	int arr1[] = { 1,2,3,4,5 };
+//	int arr2[] = { 2,3,4,5,6 };
+//	int arr3[] = { 3,4,5,6,7 };
+//	
+//	int* parr[3] = { arr1,arr2,arr3 };
+//	int i = 0;
+//	for(i = 0 ; i< 3 ; i++)
+//	{ 
+//		for (int j = 0; j < 5; j++)
+//		{
+//			//printf("%d", *(*(parr + i)+j));
+//			printf("%d",parr[i][j]);
+//		}
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+
+void test(int arr[])
+{
+	;
+}
+//void test1(int* p)
+//{
+//	;
+//}
+void test1(int** p)
+{
+	;
+}
+
+
+#include<stdio.h>
 int main()
 {
 	int a = 0;
-	int* p = &a;//p中存放a的地址
-	int** p1 = &p;//p1中存放p的地址
-	//其用法也相同，*p找到a的地址空间，*p1找到p的地址空间也就是真正的p
-	//而不是p的地址，再一次解应用即 * *p1 =  * p 就可以找到a
+	int* p = &a;
+	test(p);
+	//test1(&p);
+
 	return 0;
 }

@@ -1,6 +1,7 @@
  #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<assert.h>
+#include<string.h>
 
 
 
@@ -33,6 +34,29 @@ void buble_qsort(void* base, size_t num, size_t width, int (*cmp)(const void* el
 
 }
 
+typedef struct Stu {
+	char name[20];
+	int age;
+} Stu;
+
+int stru_name(const void* e1, const void* e2)
+{
+	return strcmp(((Stu *)e1)->name, ((Stu*)e2)->name);//强制类型转换的优先级小于->，对此我们还应该加上（）来先将void * 变成 Stu*
+}
+int stru_age(const void* e1, const void* e2)
+{
+	return ((Stu*)e1)->age - ((Stu*)e2)->age;
+	
+}
+
+void str()
+{
+
+	Stu student[3] = { {"zhansang",18},{"lisi",55},{"wangwu",22} };
+	//buble_qsort(student, 3, sizeof(Stu), stru_name);
+	buble_qsort(student, 3, sizeof(Stu), stru_age);
+}
+
 
 
 //整形的比较函数，注意其类型要和qsort内所接收的函数指针类型相同即类型int (void *,void *)
@@ -55,7 +79,7 @@ int main()
 {
 	//void qsort( void *base, size_t num, size_t width, int (__cdecl *compare )(const void *elem1, const void *elem2 ) );
 	it();
-
+	str();
 
 	return 0;
 }

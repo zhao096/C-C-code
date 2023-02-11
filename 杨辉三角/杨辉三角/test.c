@@ -23,9 +23,15 @@ int main()
 	}
 	for (COL = 0; COL < i; COL++)
 	{
+		int t = 0;
+
+		for (t = 0; t < i - COL+1; t++)
+		{
+			printf(" ");
+		}
 		for (j = 0; j <= COL; j++)
 		{ 
-			printf("%-3d", arr[COL][j]);
+			printf("%-4d ", arr[COL][j]);
 		}
 		printf("\n");
 	}
