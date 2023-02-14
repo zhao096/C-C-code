@@ -7,16 +7,16 @@ int main()
 	int i = 0; 
 	char a[] = "abcde\nfg\nef";
 	
-	//int iscntrl(int c);传进字符的ASCII码值//在ASCII码中0~31和127共33个控制字符
+	//int iscntrl(int c);传进字符的ASCII码值
 	while (!iscntrl(a[i]))//如果是控制字符返回非零的数，再！为假跳出循环
 	{
-		printf("%c", a[i++]);
+		printf("%c", a[i++]);	
 
 	}
 
 	printf("\n"); i++;
 	
-	while (!isspace(a[i]))//从f开始//遇到空白字符就会返回非0的数，再同理...
+	while (!isspace(a[i]))//从f开始遇到 空白字符 就会返回非0的数
 	{
 		printf("%c", a[i++]);
 	}
@@ -65,9 +65,21 @@ int main()
 
 
 	if (ispunct('@'))//除数字，字母的标点符号的图形字符
-
+	{ 
 		printf("ispunct");
-
+	}
+	printf("\n");
+	 
+	if (isgraph('@'))//除了空格的可打印出的字符
+	{
+		printf("isgraph");
+	}
+	printf("\n");
+	
+	if (isprint('!'))//判断是不是可打印字符
+	{
+		printf("isgraph");
+	}
 	printf("\n");
 
 	return 0;
