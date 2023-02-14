@@ -32,10 +32,12 @@ void* my_memmove(void * des ,const void* src, size_t count)
 int main()
 {
 	//模拟实现memmove    void *memmove( void *dest, const void *src, size_t count );他还要满足当指向统一空间时
+	
 	char arr1[] = "abcdef";
 	char arr2[] = "qwer";
 
-	printf("%s\n", (char*)memmove(arr1, arr1+2, 4));
+	printf("%s\n", (char*)memmove(arr1+3, arr1+2, 2));
+
 	printf("%s\n", (char*)my_memmove(arr1, arr2,4 ));
 
 
