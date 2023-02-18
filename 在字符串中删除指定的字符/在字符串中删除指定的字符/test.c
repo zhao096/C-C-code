@@ -12,7 +12,7 @@ int main()
 		char tmp = arr[i];
 		if (strstr(arr, tmp) != NULL)
 		{
-			*(strstr(arr, tmp)) = ' '
+			strstr(arr, tmp) = ' '
 		}
 	}
 	return 0;
