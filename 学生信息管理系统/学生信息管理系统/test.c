@@ -4,7 +4,7 @@
 
 enum function
 {
-	Exit = 0,
+	Exit ,
 	Add,
 	Del,
 	Search,
