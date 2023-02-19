@@ -72,25 +72,43 @@
 //
 //}
 
-struct S3
+//struct S3
+//{
+//	double d;// 对齐数8
+//	char c;// 1
+//	int i;//4
+//};//总大小为 8 -> 8 + 1 -> 12 + 4 -> 16
+//
+//struct S4
+//{
+//	char c1;// 1
+//	struct S3 s3;// 16
+//	double d;// 8
+//};
+////此处double类型的大小是8 默认也是8 所以最终对齐数就是8 ，其次注意嵌套结构体 放在外部的结构体时要对齐到
+//		//嵌套结构体内部最大对齐数的整数倍即8的倍数，
+////并且刚好32也是最大对齐数8的整数倍（包含嵌套内成员的对齐数）
+//int main()
+//{
+//	printf("%d\n", sizeof(struct S4));//总大小为：1 - > 8(直接找倍数) + 16 - > 24 + 8 -> 32
+//	return 0;
+//}
+#include<string.h>
+struct Stu
 {
-	double d;// 对齐数8
-	char c;// 1
-	int i;//4
-};//总大小为 8 -> 8 + 1 -> 12 + 4 -> 16
+	char name[20];
+	int age;
+	char sex[5];
+}student;
 
-struct S4
-{
-	char c1;// 1
-	struct S3 s3;// 16
-	double d;// 8
-};
-//此处double类型的大小是8 默认也是8 所以最终对齐数就是8 ，其次注意嵌套结构体 放在外部的结构体时要对齐到
-		//嵌套结构体内部最大对齐数的整数倍即8的倍数，
-//并且刚好32也是最大对齐数8的整数倍（包含嵌套内成员的对齐数）
 int main()
 {
-	printf("%d\n", sizeof(struct S4));//总大小为：1 - > 8(直接找倍数) + 16 - > 24 + 8 -> 32
+
+	student.age = 25;
+	//字符串数组的话，你要想赋值，你就必须要通过拷贝
+	strcpy(student.name, "LiSi");
+	strcpy(student.sex, "男");
+	printf("%s %d %s", student.name,student.age,student.sex);
 	return 0;
 }
 
