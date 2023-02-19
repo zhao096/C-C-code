@@ -43,18 +43,18 @@ int stru_name(const void* e1, const void* e2)
 {
 	return strcmp(((Stu *)e1)->name, ((Stu*)e2)->name);//强制类型转换的优先级小于->，对此我们还应该加上（）来先将void * 变成 Stu*
 }
-int stru_age(const void* e1, const void* e2)
-{
-	return ((Stu*)e1)->age - ((Stu*)e2)->age;
-	
-}
+//int stru_age(const void* e1, const void* e2)
+//{
+//	return ((Stu*)e1)->age - ((Stu*)e2)->age;
+//	
+//}
 
 void str()
 {
 
 	Stu student[3] = { {"zhansang",18},{"lisi",55},{"wangwu",22} };
-	//buble_qsort(student, 3, sizeof(Stu), stru_name);
-	buble_qsort(student, 3, sizeof(Stu), stru_age);
+	buble_qsort(student, 3, sizeof(Stu), stru_name);
+	//buble_qsort(student, 3, sizeof(Stu), stru_age);
 }
 
 
@@ -79,7 +79,7 @@ int main()
 {
 	//void qsort( void *base, size_t num, size_t width, int (__cdecl *compare )(const void *elem1, const void *elem2 ) );
 	it();
-	str();
+	//str();
 
 	return 0;
 }
