@@ -72,9 +72,10 @@ int main()
 			Show_Stu_message(&con);
 			break;
 		case Sort:
-			Sort
+			Sort_Stu_message(&con);
 			break;
 		case Refresh:
+			Refresh_Stu_message(&con);
 			break;
 		case Exit:
 			printf("ÍË³ö\n");

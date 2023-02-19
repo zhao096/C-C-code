@@ -7,7 +7,7 @@ void InitCon(Info_System* con)
 {
 	assert(con);
 	con->sz = 0;
-	memset(con->Contact, 0, sizeof(Info_System));//利用memset将一块连续的空间初始化成0最后要初始化多少个字节
+	memset(con->Contact, 'a', sizeof(Info_System));//利用memset将一块连续的空间初始化成0最后要初始化多少个字节
 }
 
 int FindById(int Id, const Info_System* con)
@@ -174,7 +174,7 @@ void Search_Stu_message(const Info_System* con)
 
 void Modeifyh_Stu_message(Info_System* con)
 {
-
+	assert(con);
 	int i = 0;
 	printf("1.Id\n2.Name\n选择查找方法：>");
 	scanf("%d", &i);
@@ -187,16 +187,6 @@ void Modeifyh_Stu_message(Info_System* con)
 		int ret = FindById(input, con);
 		if (ret != -1)
 		{
-			printf("原信息:\n%-10s %-20s %-20s %-5s %-20s %-10s\n", "学号", "名字", "班级", "性别", "宿舍", "计算机成绩");
-
-			printf("%-10d %-20s %-20s %-5s %-20s %-10d\n", con->Contact[ret].ID,
-				con->Contact[ret].Name,
-				con->Contact[ret].Class,
-				con->Contact[ret].Sex,
-				con->Contact[ret].Room,
-				con->Contact[ret].Score);
-			
-
 			printf("修改：>\n");
 			printf("依次输入学号 名字 班级 性别 宿舍 计算机成绩\n并且以空格/回车分隔\n");
 			scanf("%d %s %s %s %s %d", &con->Contact[ret].ID,
@@ -207,7 +197,7 @@ void Modeifyh_Stu_message(Info_System* con)
 				&con->Contact[ret].Score
 			);
 
-
+			printf("修改完成\n");
 		}
 	}
 	else if (i == 2)
@@ -219,16 +209,6 @@ void Modeifyh_Stu_message(Info_System* con)
 
 		if (ret != -1)
 		{
-			printf("原信息:\n%-10s %-20s %-20s %-5s %-20s %-10s\n", "学号", "名字", "班级", "性别", "宿舍", "计算机成绩");
-
-			printf("%-10d %-20s %-20s %-5s %-20s %-10d\n", con->Contact[ret].ID,
-				con->Contact[ret].Name,
-				con->Contact[ret].Class,
-				con->Contact[ret].Sex,
-				con->Contact[ret].Room,
-				con->Contact[ret].Score);
-
-
 			printf("修改：>\n");
 			printf("依次输入学号 名字 班级 性别 宿舍 计算机成绩\n并且以空格/回车分隔\n");
 			scanf("%d %s %s %s %s %d", &con->Contact[ret].ID,
@@ -238,6 +218,8 @@ void Modeifyh_Stu_message(Info_System* con)
 				con->Contact[ret].Room,
 				&con->Contact[ret].Score
 			);
+			printf("修改完成\n");
+
 		}
 	}
 
@@ -246,3 +228,63 @@ void Modeifyh_Stu_message(Info_System* con)
 		printf("选择错误\n");
 	}
 }
+
+int Sort_Name(const void* e1, const void* e2)
+{
+	return strcmp(((PeoInfo*)e1)->Name, ((PeoInfo*)e2)->Name);
+	//注意强转要写成 PeoInfo* 结构体类型
+	//返回大于0的数才交换，即是升序形式
+}
+
+int Sort_age(const void* e1, const void* e2)
+{
+	return ((PeoInfo*)e1)->ID  - ((PeoInfo*)e2)->ID;
+}
+void Sort_Stu_message(Info_System* con)
+{
+	assert(con);
+	int input = 0;
+	printf("1.以名字排序\n2.以学号排序\n");
+	scanf("%d", &input);
+	switch (input)
+	{
+	case 1:
+		//贼雕
+		//ASCII升序
+		qsort(con->Contact, con->sz, sizeof(con->Contact[0]), Sort_Name);//头文件stdlib，比较函数int compare（const void *elem1, const void *elem2）
+		//此处con->Contact 直接找到了数组名传进去，所以qsort内所接受到的结构体时PeoInfo类型的
+		//类似buble_qsort(student, 3, sizeof(Stu), stru_name); 
+		
+		//typedef struct Stu {
+		//	char name[20];
+		//	int age;
+		//} Stu;
+		//int stru_name(const void* e1, const void* e2){
+		//	return strcmp(((Stu*)e1)->name, ((Stu*)e2)->name);//强制类型转换的优先级小于->，对此我们还应该加上（）来先将void * 变成 Stu*
+		//}
+		//void str(){
+		//	Stu student[3] = { {"zhansang",18},{"lisi",55},{"wangwu",22} };
+		//	buble_qsort(student, 3, sizeof(Stu), stru_name);
+		//}
+		printf("排序成功\n");
+
+		break;
+	case 2:
+		//升序
+		qsort(con->Contact, con->sz, sizeof(con->Contact[0]), Sort_age);
+		printf("排序成功\n");
+		break;
+	default:
+		printf("输入错误\n");
+		break;
+	}
+}
+
+void Refresh_Stu_message(Info_System* con)
+{
+	InitCon(con);
+	printf("刷新成功\n");
+}
+
+
+

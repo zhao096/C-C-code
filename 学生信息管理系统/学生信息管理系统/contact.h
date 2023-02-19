@@ -2,6 +2,7 @@
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #include<assert.h>
 
 
@@ -43,3 +44,8 @@ void Del_Stu_message (Info_System* con);
 void Search_Stu_message(const Info_System* con);
 
 void Modeifyh_Stu_message(Info_System* con);
+
+void Sort_Stu_message(Info_System* con);
+
+void Refresh_Stu_message(Info_System* con);
+
