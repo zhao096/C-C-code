@@ -29,6 +29,7 @@ void rotate(int* nums, int numsSize, int k) {
     }
 
 }
+//
 #include<stdio.h>
 int main()
 {
