@@ -108,7 +108,7 @@ int main()
 	//字符串数组的话，你要想赋值，你就必须要通过拷贝
 	strcpy(student.name, "LiSi");
 	strcpy(student.sex, "男");
-	printf("%s %d %s", student.name,student.age,student.sex);
+	printf("%s %d %s", student.name,student.age,student.sex)//
 	return 0;
 }
 
