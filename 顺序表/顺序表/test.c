@@ -1,30 +1,37 @@
- #define _CRT_SECURE_NO_WARNINGS 1
-#pragma once
-#include <stdio.h>
-#include <assert.h>
-#include <stdlib.h>
+#define _CRT_SECURE_NO_WARNINGS 1
 
-typedef int SLDateType;
-typedef struct SeqList
+#include"SLTable.h"
+
+int main()
 {
-	SLDateType* a;
-	int size;
-	int capacity;
-}SeqList;
 
-// 对数据的管理:增删查改 
-void SeqListInit(SeqList* ps);
-void SeqListDestroy(SeqList* ps);
+	SeqList con;
 
-void SeqListPrint(SeqList* ps);
-void SeqListPushBack(SeqList* ps, SLDateType x);
-void SeqListPushFront(SeqList* ps, SLDateType x);
-void SeqListPopFront(SeqList* ps);
-void SeqListPopBack(SeqList* ps);
+	SeqListInit(&con);
+	
+	//SeqListDestroy(&con);
 
-// 顺序表查找
-int SeqListFind(SeqList* ps, SLDateType x);
-// 顺序表在pos位置插入x
-void SeqListInsert(SeqList* ps, int pos, SLDateType x);
-// 顺序表删除pos位置的值
-void SeqListErase(SeqList* ps, int pos);
+	SeqListPushFront(&con, 20);
+
+	SeqListPushBack(&con, 10);
+
+	SeqListPushBack(&con, 5);
+
+	SeqListPrint(&con);
+
+	SeqListInsert(&con, 2, 8);
+	SeqListInsert(&con, 4, 7);
+
+	SeqListPrint(&con);
+	
+	SeqListPopBack(&con);
+
+	SeqListPopFront(&con);
+
+	SeqListErase(&con, 1);
+
+	SeqListPrint(&con);
+
+
+	return 0;
+}
