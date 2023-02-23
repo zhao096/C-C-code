@@ -11,6 +11,8 @@ int main()
 	
 	//SeqListDestroy(&con);
 
+
+
 	SeqListPushFront(&con, 20);
 
 	SeqListPushBack(&con, 10);
