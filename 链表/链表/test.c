@@ -10,6 +10,8 @@ void TestSTL1()
 	SListPushBack(&STL, 3);
 	SListPushBack(&STL, 4);
 	SListPopBack(&STL);
+
+	printf("%c", SListFind(&STL, 2)->data);
 	SListPoqpFront(&STL);
 
 

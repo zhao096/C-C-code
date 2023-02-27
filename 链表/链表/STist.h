@@ -28,6 +28,7 @@ void SListPoqpFront(SListNode** pplist);
 SListNode* SListFind(SListNode* plist, SLTDateType x);
 // 单链表在pos位置之后插入x
 // 分析思考为什么不在pos位置之前插入？
+//当给定pos位置后就没有办法在将前面的内容进行改变
 void SListInsertAfter(SListNode* pos, SLTDateType x);
 // 单链表删除pos位置之后的值
 // 分析思考为什么不删除pos位置？

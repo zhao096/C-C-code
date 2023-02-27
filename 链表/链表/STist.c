@@ -98,4 +98,37 @@ SListNode* SListFind(SListNode* phead, SLTDateType x) {
 	printf("ÕÒ²»µ½\n");
 	return NULL;
 }
+void SListInsertAfter(SListNode* pos, SLTDateType x) {
+	SListNode* newnode = BuySListNode(x);
+	pos->next = newnode;
+}
+
+void SListEraseAfter(SListNode* pos) {
+	if (pos->next == NULL)
+	{
+		return;
+	}
+	else {
+		pos->next = pos->next->next;
+	}
+}
+
+void SListDestroy(SListNode* plist) {
+	if (plist == NULL) {
+		return;
+	}
+	else {
+
+		SListNode* tail = plist;
+		while (tail)
+		{
+			SListNode* tmp = tail;
+
+			while (tmp->next) {
+				tmp = tmp->next;
+			}
+			free(tmp);
+		}
+	}
+}
 
