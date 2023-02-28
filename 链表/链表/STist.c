@@ -85,7 +85,6 @@ void SListPoqpFront(SListNode** pphead) {
 }
 
 SListNode* SListFind(SListNode* phead, SLTDateType x) {
-	assert(phead);
 	SListNode* find = phead;
 	while (find)
 	{
@@ -98,8 +97,10 @@ SListNode* SListFind(SListNode* phead, SLTDateType x) {
 	printf("ÕÒ²»µ½\n");
 	return NULL;
 }
+
 void SListInsertAfter(SListNode* pos, SLTDateType x) {
 	SListNode* newnode = BuySListNode(x);
+	newnode->next = pos->next;
 	pos->next = newnode;
 }
 
