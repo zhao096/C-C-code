@@ -27,6 +27,7 @@ void SListPrint(SListNode* phead)
 }
 
 void SListPushBack(SListNode** pphead, SLTDateType x) {
+	assert(pphead);
 	SListNode* newnode = BuySListNode(x);
 	SListNode* tail = *pphead;
 	if (*pphead == NULL)
@@ -42,6 +43,7 @@ void SListPushBack(SListNode** pphead, SLTDateType x) {
 }
 
 void SListPushFront(SListNode** pphead, SLTDateType x){
+	assert(pphead);
 	SListNode* newnode = BuySListNode(x);
 	newnode->next = *pphead;
 	*pphead = newnode;
@@ -49,6 +51,7 @@ void SListPushFront(SListNode** pphead, SLTDateType x){
 
 void SListPopBack(SListNode** pphead) {
 	assert(pphead);
+	assert(*pphead);
 	if ((*pphead)->next == NULL)
 	{
 		free(*pphead);
@@ -70,7 +73,7 @@ void SListPopBack(SListNode** pphead) {
 
 void SListPoqpFront(SListNode** pphead) {
 	assert(pphead);
-
+	assert(*pphead);
 	if ((*pphead)->next == NULL) {
 		*pphead = NULL;
 	}
@@ -99,37 +102,39 @@ SListNode* SListFind(SListNode* phead, SLTDateType x) {
 }
 
 void SListInsertAfter(SListNode* pos, SLTDateType x) {
+	assert(pos);
 	SListNode* newnode = BuySListNode(x);
 	newnode->next = pos->next;
 	pos->next = newnode;
 }
 
 void SListEraseAfter(SListNode* pos) {
+	assert(pos);
 	if (pos->next == NULL)
 	{
 		return;
 	}
 	else {
+		SListNode* del = pos->next;
 		pos->next = pos->next->next;
+		free(del);
+		del = NULL;
 	}
 }
 
 void SListDestroy(SListNode* plist) {
-	if (plist == NULL) {
-		return;
-	}
-	else {
+	assert(plist);
 
-		SListNode* tail = plist;
-		while (tail)
-		{
-			SListNode* tmp = tail;
-
-			while (tmp->next) {
-				tmp = tmp->next;
-			}
-			free(tmp);
-		}
+	SListNode* prev, * tail;
+	prev = plist;
+	tail = plist->next;
+	while (prev)
+	{	
+		free(prev);
+		prev = tail;
+		if(tail != NULL)
+		tail = tail->next;
 	}
+	plist = NULL;
 }
 

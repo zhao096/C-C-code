@@ -11,10 +11,14 @@ void TestSTL1()
 	SListPushBack(&STL, 4);
 	SListPopBack(&STL);
 
-	printf("%c", SListFind(&STL, 2)->data);
+
 	SListPoqpFront(&STL);
 
-
+	SListNode* ret = SListFind(STL, 2);
+	(ret->data) *= 2;
+	SListPrint(STL);
+	SListDestroy(STL);
+	SListPrint(STL);
 
 }
 
