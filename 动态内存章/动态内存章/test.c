@@ -43,33 +43,38 @@
 //    return 0;
 //}
 
-
-int main()
-{
-	int* p = (int*)malloc(sizeof(int) * 5);
-	if (p == NULL)
-	{
-		perror("malloc");
-		return 1;
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		*(p + i) = i + 1;
-		printf("%d ", *(p + i));
-	}
-	
-	realloc(p, sizeof(int) * 10);
-
-	for (int i = 5; i < 10; i++)
-	{
-		*(p + i) = i + 1;
-		printf("%d ", *(p + i));
-	}
-
-	free(p);
-	p = NULL;
-	return 0;
-}
+//
+//int main()
+//{
+//	int* p = (int*)malloc(sizeof(int) * 5);
+//	if (p == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//	for (int i = 0; i < 5; i++)
+//	{
+//		*(p + i) = i + 1;
+//		printf("%d ", *(p + i));
+//	}
+//	
+//	int* ptr = (int *)realloc(p, sizeof(int) * 10);
+//	if(ptr != NULL)
+//	{
+//		p = ptr;
+//		ptr = NULL;//后面的ptr不在用了，避免野指针 
+//	}
+//
+//	for (int i = 5; i < 10; i++)
+//	{
+//		*(p + i) = i + 1;
+//		printf("%d ", *(p + i));
+//	}
+//
+//	free(p);
+//	p = NULL;
+//	return 0;
+//}
 
 
 
@@ -93,3 +98,140 @@ int main()
 //    p = NULL;
 //    return 0;
 //}
+
+
+//int main()
+//{
+//	int* ptr = (int*)malloc(40);
+//	if (ptr == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//	for (int i = 0; i < 10; i++)
+//	{
+//		*(ptr + i) = i + 1;
+//		printf("%d ", *(ptr + i));
+//	}
+//	return 0;
+//}
+
+//int main()
+//{
+//	int* ptr = (int*)malloc(100);
+//	if (ptr == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//
+//	for (int i = 0; i < 100; i++)
+//	{
+//		ptr[i] = 0;
+//	}
+//	return 0;
+//}
+
+//
+//int main()
+//{
+//	int* p = (int*)malloc(100);
+//	if (p == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//	for (int i = 0; i < 25; i++)
+//	{
+//		*p = i;
+//		printf("%d ", *p);
+//		p++;
+//
+//	}
+//	free(p);
+//	p = NULL;
+//
+//	return 0;
+//}
+
+//int main()
+//{
+//    int a = 0;//正常开辟的变量存在栈区上 
+//    int* p = &a;
+//
+//    free(p);
+//    p = NULL;
+//    return 0;
+//}
+
+//int main()
+//{
+//	int* p = (int*)malloc(100);
+//	if (p == NULL)
+//	{
+//		perror("malloc");
+//		return 1;
+//	}
+//	// 使用...
+//	 
+//	//释放
+//	free(p);
+//
+//	// ...
+//
+//	free(p);
+//	return 0;
+//}
+//
+//void test()
+//{
+//	int* p = (int*)malloc(100);
+//			
+//}
+//
+//int main()
+//{
+//	test();
+//
+//	return 0;
+//}
+
+
+////该函数进行了malloc开辟空间，返回开辟空间的起始地址
+////记得后面要释放
+//int * test()
+//{
+//	int* p = (int*)malloc(100);
+//	if (p == NULL)
+//	{
+//		perror("malloc");
+//		return;
+//	}
+//	return p;
+//}
+//
+//int main()
+//{
+//	int * ptr = test();
+//	free(ptr);
+//	ptr = NULL;
+//	return 0;
+//}
+
+void GetMemory(char* p)
+{
+	p = (char*)malloc(100);
+}
+void Test(void)
+{
+	char* str = NULL;
+	GetMemory(str);//此处为传值调用，就会导致p起始只是str的零时拷贝并不会改变str，所以并没有开辟好空间，仍然为NULL
+	strcpy(str, "hello world");//因为str仍然为NULL所以就会有非法访问问题(访问了NULL地址)
+	printf(str);
+}
+//并且因为p开辟了一个空间且后面也并没有free，也会导致内存泄漏
+int main()
+{
+	Test();
+	return 0;
+}

@@ -45,8 +45,9 @@ void SListPushBack(SListNode** pphead, SLTDateType x) {
 void SListPushFront(SListNode** pphead, SLTDateType x){
 	assert(pphead);
 	SListNode* newnode = BuySListNode(x);
-	newnode->next = *pphead;
-	*pphead = newnode;
+
+	newnode->next = *pphead;//将新开辟的空间的地址指向链表的第一个元素的地址
+	*pphead = newnode;//改变链表的起始元素
 }
 
 void SListPopBack(SListNode** pphead) {
