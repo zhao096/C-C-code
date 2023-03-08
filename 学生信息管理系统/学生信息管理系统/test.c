@@ -78,6 +78,7 @@ int main()
 			Refresh_Stu_message(&con);
 			break;
 		case Exit:
+			DestoryContact(&con);
 			printf("ÍË³ö\n");
 
 			break;
@@ -88,6 +89,7 @@ int main()
 
 
 	} while (input);
+
 
 
 	return 0;

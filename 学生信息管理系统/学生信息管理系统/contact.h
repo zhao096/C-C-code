@@ -13,6 +13,10 @@
 
 #define PeoMax 100
 
+
+#define InitPeo 3
+#define AddCap 2
+
 typedef struct PeoInfo
 {
 	int ID;// 学号
@@ -23,12 +27,20 @@ typedef struct PeoInfo
 	int Score;// 成绩
 
 }PeoInfo;
+//
+//typedef struct management_System
+//{
+//
+//	PeoInfo Contact[PeoMax];//存放人的信息
+//	int sz;//已近存放了多少个人
+//}Info_System;
 
 typedef struct management_System
 {
 
-	PeoInfo Contact[PeoMax];//存放人的信息
+	PeoInfo* Contact;//存放人的信息
 	int sz;//已近存放了多少个人
+	int capacity;//容量大小
 
 }Info_System;
 

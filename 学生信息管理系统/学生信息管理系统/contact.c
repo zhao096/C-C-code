@@ -2,12 +2,47 @@
 
 #include"contact.h"
 
-//初始化
+
+void AddCapacity(Info_System* con)
+{
+	assert(con);
+	PeoInfo* ptr = (PeoInfo*)realloc(con->Contact,sizeof(PeoInfo) * (AddCap+ con->capacity));
+	if (ptr == NULL)
+	{
+		perror("realloc");
+
+		return ;
+	}
+	con->Contact = ptr;
+	con->capacity += AddCap;
+
+	ptr = NULL;
+	printf("增容成功\n");
+}
+
+
+////初始化
+//void InitCon(Info_System* con)
+//{
+//	assert(con);
+//	con->sz = 0;
+//	memset(con->Contact, 'a', sizeof(Info_System));//利用memset将一块连续的空间初始化成0最后要初始化多少个字节
+//}
+
 void InitCon(Info_System* con)
 {
 	assert(con);
 	con->sz = 0;
-	memset(con->Contact, 'a', sizeof(Info_System));//利用memset将一块连续的空间初始化成0最后要初始化多少个字节
+	con->capacity = InitPeo;
+	PeoInfo* ptr = (PeoInfo*)malloc(sizeof(PeoInfo) *InitPeo);
+	if (ptr == NULL)
+	{
+		perror("malloc");
+		return ;
+	}
+	con->Contact = ptr;
+	ptr = NULL;
+	memset(con->Contact, 0, sizeof(PeoInfo)*InitPeo);
 }
 
 int FindById(int Id, const Info_System* con)
@@ -43,10 +78,9 @@ int FindByName(char * name,const Info_System* con)
 void Add_Stu_message(Info_System* con)
 {
 	assert(con);
-	if (con->sz == PeoMax)
+	if (con->sz == con->capacity)
 	{
-		printf("信息已满,请删除或刷新后再试\n");
-		return;
+		AddCapacity(con);
 	}
 	printf("依次输入学号 名字 班级 性别 宿舍 计算机成绩\n并且以空格/回车分隔\n");
 	//printf("依次输入%-10s %-20s %-5s %-20s %-20s %-10s\n", "学号", "名字", "班级", "性别", "宿舍", "计算机成绩");
@@ -287,4 +321,15 @@ void Refresh_Stu_message(Info_System* con)
 }
 
 
+
+void DestoryContact(Info_System* con)
+{
+	free(con->Contact);
+	con->Contact = NULL;
+
+	con->capacity = 0;
+	con->sz = 0;
+	con = NULL;
+
+}
 
