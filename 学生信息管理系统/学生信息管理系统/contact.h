@@ -61,3 +61,4 @@ void Sort_Stu_message(Info_System* con);
 
 void Refresh_Stu_message(Info_System* con);
 
+void DestroyContact(Info_System* con);

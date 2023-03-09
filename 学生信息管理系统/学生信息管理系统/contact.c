@@ -221,7 +221,7 @@ void Modeifyh_Stu_message(Info_System* con)
 		int ret = FindById(input, con);
 		if (ret != -1)
 		{
-			printf("修改：>\n");
+			printf("修改：\n");
 			printf("依次输入学号 名字 班级 性别 宿舍 计算机成绩\n并且以空格/回车分隔\n");
 			scanf("%d %s %s %s %s %d", &con->Contact[ret].ID,
 				con->Contact[ret].Name,
@@ -322,7 +322,7 @@ void Refresh_Stu_message(Info_System* con)
 
 
 
-void DestoryContact(Info_System* con)
+void DestroyContact(Info_System* con)
 {
 	free(con->Contact);
 	con->Contact = NULL;
