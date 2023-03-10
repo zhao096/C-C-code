@@ -218,20 +218,66 @@
 //	return 0;
 //}
 
-void GetMemory(char* p)
+//void GetMemory(char* p)
+//{
+//	p = (char*)malloc(100);
+//}
+//void Test(void)
+//{
+//	char* str = NULL;
+//	GetMemory(str);//此处为传值调用，就会导致p起始只是str的零时拷贝并不会改变str，所以并没有开辟好空间，仍然为NULL
+//	strcpy(str, "hello world");//因为str仍然为NULL所以就会有非法访问问题(访问了NULL地址)
+//	printf(str);
+//}
+////并且因为p开辟了一个空间且后面也并没有free，也会导致内存泄漏
+//int main()
+//{
+//	Test();
+//	return 0;
+//}
+
+struct s
 {
-	p = (char*)malloc(100);
-}
-void Test(void)
+	int a;
+	char b;
+	char arr[];//柔性数组成员
+	//char arr[0];写0或者不写0是一样的，数组的大小是未知的，
+
+};
+
+
+struct s1
 {
-	char* str = NULL;
-	GetMemory(str);//此处为传值调用，就会导致p起始只是str的零时拷贝并不会改变str，所以并没有开辟好空间，仍然为NULL
-	strcpy(str, "hello world");//因为str仍然为NULL所以就会有非法访问问题(访问了NULL地址)
-	printf(str);
-}
-//并且因为p开辟了一个空间且后面也并没有free，也会导致内存泄漏
+	int a;
+	char b;
+	char *p;
+};
+
 int main()
 {
-	Test();
+	struct s *ptr = (struct s*)malloc(sizeof(struct s) + sizeof(char) * 10);//后面开辟的10个char的空间是柔性数组所需的空间
+	//再通过ptr来访问结构体
+	printf("%d\n", sizeof(struct s));
+
+	free(ptr);
+	ptr = NULL;
+
+	struct s1* ps = (struct s1*)malloc(sizeof(struct  s1));
+	ps->a = 100;
+	ps->b = 'a';
+
+	ps->p = malloc(10 * sizeof(char));
+	if (ps->p == NULL)
+	{
+		perror("malloc");
+		return 1;
+	}
+	
+	//使用  ....
+	//释放
+	free(ps->p);
+	ps->p = NULL;
+
+
 	return 0;
 }
