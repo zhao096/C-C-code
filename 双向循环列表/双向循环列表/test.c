@@ -40,8 +40,10 @@ int main()
 
 	//test1(head);
 
-	//test2(head);
+	test2(head);
 	ListDestory(head);
+	free(head);
+	head = NULL;
 	return 0;
 }
 		

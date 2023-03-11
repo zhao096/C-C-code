@@ -120,15 +120,16 @@ void ListPopFront(ListNode* pHead)
 {
 	assert(pHead);
 	assert(!If_DTLEmpty(pHead));//ÅÐ¶ÏÊÇ·ñÎª¿Õ
+	ListNode* front = pHead->next;
 
 
 	ListNode* frist = pHead->next->next;
 	pHead->next = frist;
 	frist->prev = pHead;
 
-	//ListNode* front = pHead->next;
-	//free(front);
-	//front = NULL;
+	
+	free(front);
+	front = NULL;
 }
 
 ListNode* ListFind(ListNode* pHead, LTDataType x)
@@ -186,8 +187,19 @@ void ListErase(ListNode* pos)
 void ListDestory(ListNode* pHead)
 {
 	assert(pHead);
-	free(pHead);
-	pHead = NULL;
+	ListNode* tail = pHead->prev;
+
+	while (tail != pHead)
+	{
+		ListNode* destroy = tail;
+		tail = tail->prev;
+		free(destroy);
+		destroy->next = NULL;
+		destroy->prev = NULL;
+	}
+	tail->next = NULL;
+	tail->prev = NULL;
+
 }
 
 
