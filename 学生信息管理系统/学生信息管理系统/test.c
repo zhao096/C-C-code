@@ -78,6 +78,8 @@ int main()
 			Refresh_Stu_message(&con);
 			break;
 		case Exit:
+			//保存文件
+			SaveContact(&con);
 			DestroyContact(&con);
 			printf("退出\n");
 

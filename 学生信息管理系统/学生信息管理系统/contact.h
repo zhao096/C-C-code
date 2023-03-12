@@ -17,7 +17,7 @@
 #define InitPeo 3
 #define AddCap 2
 
-typedef struct PeoInfo
+typedef struct PeoInfo//学生信息
 {
 	int ID;// 学号
 	char Name[Name_Max];// 姓名
@@ -62,3 +62,10 @@ void Sort_Stu_message(Info_System* con);
 void Refresh_Stu_message(Info_System* con);
 
 void DestroyContact(Info_System* con);
+
+
+//保存文件
+void SaveContact(Info_System*  con);
+
+//加载文件
+void LoadContact(Info_System* pc);

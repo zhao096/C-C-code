@@ -3,21 +3,59 @@
 #include"contact.h"
 
 
-void AddCapacity(Info_System* con)
+
+
+
+
+void Check_Capacity(Info_System* con)
 {
 	assert(con);
-	PeoInfo* ptr = (PeoInfo*)realloc(con->Contact,sizeof(PeoInfo) * (AddCap+ con->capacity));
-	if (ptr == NULL)
+	if (con->sz == con->capacity)
 	{
-		perror("realloc");
+		PeoInfo* ptr = (PeoInfo*)realloc(con->Contact, sizeof(PeoInfo) * (AddCap + con->capacity));
+		if (ptr == NULL)
+		{
+			perror("realloc");
 
-		return ;
+			return;
+		}
+		con->Contact = ptr;
+		con->capacity += AddCap;
+
+		ptr = NULL;
+		printf("增容成功\n");
 	}
-	con->Contact = ptr;
-	con->capacity += AddCap;
+	else {
+		return;
+	}
+}
 
-	ptr = NULL;
-	printf("增容成功\n");
+
+void LoadContact(Info_System* pc)
+{
+	//读数据
+	//1. 打开文件
+	FILE* pf = fopen("contact.txt", "rb");
+	if (pf == NULL)
+	{
+		perror("LoadContact");
+	}
+	else
+	{
+		//2. 读数据
+		PeoInfo tmp = { 0 };
+		int i = 0;
+		while (fread(&tmp, sizeof(PeoInfo), 1, pf))
+		{
+			//增容
+			Check_Capacity(pc);
+			pc->Contact[i] = tmp;
+			pc->sz++;
+			i++;
+		}
+		fclose(pf);
+		pf = NULL;
+	}
 }
 
 
@@ -31,18 +69,9 @@ void AddCapacity(Info_System* con)
 
 void InitCon(Info_System* con)
 {
-	assert(con);
-	con->sz = 0;
-	con->capacity = InitPeo;
-	PeoInfo* ptr = (PeoInfo*)malloc(sizeof(PeoInfo) *InitPeo);
-	if (ptr == NULL)
-	{
-		perror("malloc");
-		return ;
-	}
-	con->Contact = ptr;
-	ptr = NULL;
-	memset(con->Contact, 0, sizeof(PeoInfo)*InitPeo);
+	Refresh_Stu_message(con);
+
+	LoadContact(con);
 }
 
 int FindById(int Id, const Info_System* con)
@@ -78,10 +107,8 @@ int FindByName(char * name,const Info_System* con)
 void Add_Stu_message(Info_System* con)
 {
 	assert(con);
-	if (con->sz == con->capacity)
-	{
-		AddCapacity(con);
-	}
+	Check_Capacity(con);
+
 	printf("依次输入学号 名字 班级 性别 宿舍 计算机成绩\n并且以空格/回车分隔\n");
 	//printf("依次输入%-10s %-20s %-5s %-20s %-20s %-10s\n", "学号", "名字", "班级", "性别", "宿舍", "计算机成绩");
 	//对于下面的输入操作我们需要引用并且存进结构体中 对于数组来说不需要加上& 
@@ -316,8 +343,19 @@ void Sort_Stu_message(Info_System* con)
 
 void Refresh_Stu_message(Info_System* con)
 {
-	InitCon(con);
-	printf("刷新成功\n");
+	assert(con);
+	con->sz = 0;
+	con->capacity = InitPeo;
+	PeoInfo* ptr = (PeoInfo*)malloc(sizeof(PeoInfo) * InitPeo);
+	if (ptr == NULL)
+	{
+		perror("malloc");
+		return;
+	}
+	con->Contact = ptr;
+	ptr = NULL;
+	memset(con->Contact, 0, sizeof(PeoInfo) * InitPeo);
+
 }
 
 
@@ -330,6 +368,26 @@ void DestroyContact(Info_System* con)
 	con->capacity = 0;
 	con->sz = 0;
 	con = NULL;
+
+}
+
+
+void SaveContact(Info_System* con)
+{
+	FILE* pf = fopen("contact.txt","wb");
+	if (pf == NULL)
+	{
+		perror("SaveContact");
+		return;
+	}
+	int i = 0;
+	for (i = 0; i < con->sz; i++)
+	{
+		fwrite(con->Contact + i, sizeof(PeoInfo), 1, pf);
+	}
+	
+	fclose(pf);
+	pf = NULL;
 
 }
 
