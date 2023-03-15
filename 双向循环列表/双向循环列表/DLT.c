@@ -136,11 +136,6 @@ ListNode* ListFind(ListNode* pHead, LTDataType x)
 {
 
 	assert(pHead);
-	if (If_DTLEmpty(pHead))
-	{
-		printf("无数据\n");
-		return NULL;
-	}
 
 	ListNode* tail = pHead;
 	while (tail)
@@ -151,7 +146,7 @@ ListNode* ListFind(ListNode* pHead, LTDataType x)
 		}
 		tail = tail->next;
 	}
-	printf("找不到\n"); 
+	printf("不存在,找不到\n"); 
 	return NULL;
 }
 
@@ -182,6 +177,8 @@ void ListErase(ListNode* pos)
 	
 	tail->prev = prev;
 
+	free(pos);
+
 }
 
 void ListDestory(ListNode* pHead)
@@ -194,12 +191,9 @@ void ListDestory(ListNode* pHead)
 		ListNode* destroy = tail;
 		tail = tail->prev;
 		free(destroy);
-		destroy->next = NULL;
-		destroy->prev = NULL;
 	}
-	tail->next = NULL;
-	tail->prev = NULL;
 
+	free(pHead);
 }
 
 
