@@ -2,6 +2,23 @@
 
 #include"SLTable.h"
 
+void check_capacity(SeqList * ps)
+{
+	assert(ps);
+
+	if ((ps->size == ps->capacity - 1))
+	{
+		//ps->a = (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->size * 2);//仍然会报错，所以要写成如下形式
+		SLDateType* tmp = (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->capacity * 2);
+		if (tmp == NULL)
+		{
+			perror("tmp");
+			return;
+		}
+		ps->a = tmp;
+		ps->capacity *= 2;
+	}
+}
 
 void SeqListInit(SeqList* ps)
 {
@@ -37,19 +54,9 @@ void SeqListPrint(SeqList* ps)
 void SeqListPushBack(SeqList* ps, SLDateType x)
 {
 	assert(ps);
-	if ((ps->size == ps->capacity))
-	{
-		//ps->a = (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->size * 2);//仍然会报错，所以要写成如下形式
-		SLDateType* tmp= (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->size * 2); 
-		if (tmp == NULL)
-		{
-			perror("tmp");
-			return;
-		}
-		ps->a = tmp;
-		ps->capacity *= 2;
-	}
-	ps->a[ps->size++] = x;
+	check_capacity(ps);
+
+	ps->a[ps->size++] = x;//把最后一个元素放到最后size是元素个数用来做下标刚好指向最后一个的后面
 }
 
 void SeqListPopBack(SeqList* ps)
@@ -62,19 +69,7 @@ void SeqListPopBack(SeqList* ps)
 void SeqListPushFront(SeqList* ps, SLDateType x)
 {
 	assert(ps);
-	if ((ps->size == ps->capacity - 1))
-	{
-		//ps->a = (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->size * 2);//仍然会报错，所以要写成如下形式
-		SLDateType* tmp = (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->size * 2); 
-		if (tmp == NULL)
-		{
-			perror("tmp");
-			return;
-		}
-		ps->a = tmp;
-		ps->capacity *= 2;
-	}
-
+	check_capacity(ps);
 	for (int i = ps->size  ; i > 0 ; i--)
 	{	
 		ps->a[i] = ps->a[i - 1];
@@ -121,18 +116,8 @@ void SeqListInsert(SeqList* ps, int pos, SLDateType x)
 {
 	assert(ps);
 	assert(ps->size);//判断成员是否为0，为0就报错
-	if ((ps->size == ps->capacity))
-	{
-		//ps->a = (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->size * 2);//仍然会报错，所以要写成如下形式
-		SLDateType* tmp = (SLDateType*)realloc(ps->a, sizeof(SLDateType) * ps->size * 2); 
-			if (tmp == NULL)
-			{
-				perror("tmp");
-				return;
-			}
-		ps->a = tmp;
-		ps->capacity *= 2;
-	}
+	check_capacity(ps);
+
 
 	for (int i = ps->size ; i > pos - 1; i--)//注意pop是我吗所看到的的位置，而数组的位置是要-1的
 	{
