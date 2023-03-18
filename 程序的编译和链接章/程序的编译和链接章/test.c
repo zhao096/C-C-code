@@ -64,22 +64,53 @@
 //	return 0;
 //}
 
-#define MAX(a,b) ((a)>(b)?(a):(b))
+//#define MAX(a,b) ((a)>(b)?(a):(b))
+//
+//int main()
+//{
+//	int a = 3, b = 4;
+//#undef MAX
+//	int m = MAX(a++, b++);
+//	//((a++) > (b++) ? (a++) : (b++))
+//	//因为是a++ 、 b++ 所以先比较后++ 所以较大值4 ，然后：a = 4 b = 5；
+//	//(b++)再因为还要到后面的b++ b = 6
+//	printf("%d\n", m);
+//	printf("%d %d", a, b);
+//
+//	return 0;
+//}
+
+//#define PRINT 0
+
+//int main()
+//{
+//#ifdef PRINT //是否定义该符号，定义了则进去，否则不进去
+//    printf("%d\n", 1);
+//#endif//和ifdef是一组的，必须成对出现
+//    return 0;
+//}
+
+#include"test.h"  
+#define M 2
 
 int main()
 {
-	int a = 3, b = 4;
-#undef MAX
-	int m = MAX(a++, b++);
-	//((a++) > (b++) ? (a++) : (b++))
-	//因为是a++ 、 b++ 所以先比较后++ 所以较大值4 ，然后：a = 4 b = 5；
-	//(b++)再因为还要到后面的b++ b = 6
-	printf("%d\n", m);
-	printf("%d %d", a, b);
+//#if 1
+//	printf("%d\n", 1);
+//#endif
+
+#if M == 1
+	printf("%d\n", 1);
+#elif M == 2
+	printf("%d\n", 2);//最终打印2
+#else
+	printf("ohuo");
+#endif
+
 
 	return 0;
 }
 
 
-
+ 
 
