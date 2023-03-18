@@ -15,14 +15,14 @@
 //	return 0;
 //}
 #define ADD(a) a + a
-//
-//int main()
-//{
-//	int a = 5;
-//	printf("%d\n", ADD(a));
-//
-//	return 0;
-//}
+
+int main()
+{
+	int a = 5;
+	printf("%d\n", ADD(a));
+	//printf("%d\n",5 + 5);
+	return 0;
+}
 
 
 //int main()
@@ -89,27 +89,27 @@
 //#endif//和ifdef是一组的，必须成对出现
 //    return 0;
 //}
-
-#include"test.h"  
-#define M 2
-
-int main()
-{
+//
+//#include"test.h"  
+//#define M 2
+//
+//int main()
+//{
 //#if 1
 //	printf("%d\n", 1);
 //#endif
-
-#if M == 1
-	printf("%d\n", 1);
-#elif M == 2
-	printf("%d\n", 2);//最终打印2
-#else
-	printf("ohuo");
-#endif
-
-
-	return 0;
-}
+//
+//#if M == 1
+//	printf("%d\n", 1);
+//#elif M == 2
+//	printf("%d\n", 2);//最终打印2
+//#else
+//	printf("ohuo");
+//#endif
+//
+//
+//	return 0;
+//}
 
 
  
