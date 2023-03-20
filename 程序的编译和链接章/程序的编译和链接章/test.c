@@ -82,34 +82,34 @@ int main()
 
 //#define PRINT 0
 
-//int main()
-//{
-//#ifdef PRINT //是否定义该符号，定义了则进去，否则不进去
-//    printf("%d\n", 1);
-//#endif//和ifdef是一组的，必须成对出现
-//    return 0;
-//}
-//
-//#include"test.h"  
-//#define M 2
-//
-//int main()
-//{
-//#if 1
-//	printf("%d\n", 1);
-//#endif
-//
-//#if M == 1
-//	printf("%d\n", 1);
-//#elif M == 2
-//	printf("%d\n", 2);//最终打印2
-//#else
-//	printf("ohuo");
-//#endif
-//
-//
-//	return 0;
-//}
+int main()
+{
+#ifdef PRINT //是否定义该符号，定义了则进去，否则不进去
+    printf("%d\n", 1);
+#endif//和ifdef是一组的，必须成对出现
+    return 0;
+}
+
+#include"test.h"  
+#define M 2
+
+int main()
+{
+#if 1
+	printf("%d\n", 1);
+#endif
+
+#if M == 1
+	printf("%d\n", 1);
+#elif M == 2
+	printf("%d\n", 2);//最终打印2
+#else
+	printf("ohuo");
+#endif
+
+
+	return 0;
+}
 
 
  
