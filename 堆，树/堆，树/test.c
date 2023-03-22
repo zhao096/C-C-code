@@ -4,7 +4,7 @@
 void Adjustup(HPDataType* a, int child)
 {
 	int parent = (chile - 1) / 2;
-	while (parent>= 0)
+	while (parent>= 0)/////////////
 	{
 		if (a[parent] < a[chile])
 		{
