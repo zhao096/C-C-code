@@ -4,14 +4,14 @@
 #include<assert.h>
 #include<stdbool.h>
 
-typedef int datetype;
+	typedef int datetype;
 
-typedef struct stack
-{
-	datetype* date;
-	int top;
-	int capacity;
-}stack;
+	typedef struct stack
+	{
+		datetype* date;
+		int top;
+		int capacity;
+	}stack;
 
 void StackInit(stack* ps);
 void StackDestroy(stack* ps);
