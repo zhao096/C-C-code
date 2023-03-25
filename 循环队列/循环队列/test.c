@@ -81,11 +81,14 @@ int myCircularQueueRear(MyCircularQueue* obj) {
     {
         return -1;
     }
-    else
+    else if(obj->rear == 0 || obj->rear == 1)
     {
         return obj->a[(obj->rear + obj->k) % (obj->k + 1 )-1];
     }
-
+    else
+    {
+        return obj->a[obj->rear - 2];
+    }
 }
 
 
