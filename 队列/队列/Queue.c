@@ -6,8 +6,8 @@
 void QueueInit(Queue* q)
 {
 	assert(q);
-	q->_front = NULL;
-	q->_rear = NULL;
+	q->_front = q->_rear = NULL;
+
 	q->_size = 0;
 }
 
@@ -47,10 +47,16 @@ void QueuePop(Queue* q)
 	QNode* tmp = q->_front->_pNext;
 	if (q->_front == q->_rear)
 	{
-		q->_rear = NULL;
+		free(q->_front);
+
+		q->_front = q->_rear = NULL;
 	}
-	free(q->_front);
-	q->_front = tmp;
+	else
+	{
+		free(q->_front);
+
+		q->_front = tmp;
+	}
 	q->_size--;
 }
 
@@ -83,6 +89,8 @@ void QueueDestroy(Queue* q)
 		free(q->_front);
 		q->_front = next;
 	}
+	q->_front = q->_rear = NULL;
+	q->_size = 0;
 }
 
 
