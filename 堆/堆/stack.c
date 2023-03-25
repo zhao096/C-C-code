@@ -1,138 +1,78 @@
 typedef char datetype;
+#include"stack.h"
 
-typedef struct stack
-{
-	datetype* date;
-	int top;
-	int capacity;
-}stack;
 
 bool StackEmpty(stack* ps)
 {
-	assert(ps);
-	//if (ps->top == 0)
-	//{
-	//	return true;
-	//}
-	//return false;
+    assert(ps);
+    //if (ps->top == 0)
+    //{
+    //	return true;
+    //}
+    //return false;
 
-	return ps->top == 0;//等于0返回真，反之则为假
+    return ps->top == 0;//等于0返回真，反之则为假
 }
 
 
 
 void StackInit(stack* ps)
 {
-	assert(ps);
-	ps->capacity = 3;
+    ps->capacity = 3;
 
-	ps->date = malloc(sizeof(datetype) * ps->capacity);//注意初始化要开辟空间给指针否则无法放
-	if (ps->date == NULL)
-	{
-		perror("malloc");
-		return;
-	}
-	ps->top = 0;//注意top指向的是下一个堆顶的位置
+    ps->date = malloc(sizeof(datetype) * ps->capacity);//注意初始化要开辟空间给指针否则无法放
+    if (ps->date == NULL)
+    {
+        perror("malloc");
+        return;
+    }
+    ps->top = 0;//注意top指向的是下一个堆顶的位置
 }
 
 void StackDestroy(stack* ps)
 {
-	assert(ps);
-	ps->capacity = 0;
-	ps->top = 0;
-	free(ps->date);
-	ps->date = NULL;
+    assert(ps);
+    ps->capacity = 0;
+    ps->top = 0;
+    free(ps->date);
+    ps->date = NULL;
 
 }
 
 
 void StackPush(stack* ps, datetype x)
 {
-	assert(ps);
-	if (ps->top == ps->capacity)
-	{
-		datetype* tmp = (datetype*)realloc(ps->date, sizeof(stack) * ps->capacity * 2);//应该对数据的类型进行扩容，因为数据存在的是该指针中
-		if (tmp == NULL)
-		{
-			perror("realloc");
-			return;
-		}
-		ps->date = tmp;
-		ps->capacity *= 2;
-	}
-	ps->date[ps->top] = x;
-	ps->top++;
+    assert(ps);
+    if (ps->top == ps->capacity)
+    {
+        datetype* tmp = (datetype*)realloc(ps->date, sizeof(stack) * ps->capacity * 2);//应该对数据的类型进行扩容，因为数据存在的是该指针中
+        if (tmp == NULL)
+        {
+            perror("realloc");
+            return;
+        }
+        ps->date = tmp;
+        ps->capacity *= 2;
+    }
+    ps->date[ps->top] = x;
+    ps->top++;
 }
 
 void StackPop(stack* ps)
 {
-	assert(ps);//为假就会报错
-	assert(!StackEmpty(ps));
-	ps->top--;
+    assert(ps);//为假就会报错
+    assert(!StackEmpty(ps));
+    ps->top--;
 }
 
 datetype StackTop(stack* ps)
 {
-	assert(ps);
-	assert(!StackEmpty(ps));
-	return ps->date[ps->top - 1];
+    assert(ps);
+    return ps->date[ps->top - 1];
 }
 
 int StackSize(stack* ps)
 {
-	assert(ps);
-	return ps->top;
-}
-
-
-bool isValid(char * s){
-    stack p;
-    StackInit(&p);
-    char * tmp = s;
-    char arr[10000] = {0};
-    
-    int i = 0;
-    for(;*tmp;tmp++)
-    {
-        if(*tmp == '(' || *tmp == '{' || *tmp == '[')
-        {
-            StackPush(&p,*tmp);
-        }
-        else
-        {
-            arr[i++] = *tmp;
-        }
-    }
-    int tmp2 = i;
-    for(i = 0;i<=tmp2 ;i++)
-    {
-        char tmp1 = StackTop(&p);
-        if(tmp1 == '(')
-        {
-            if(arr[i] == ')')
-            {
-                StackPop(&p);
-            }
-        }
-        else if(tmp1 == '{')
-        {
-            if(arr[i] == '}')
-            {
-                StackPop(&p);
-            }
-        }
-        else{
-            if(arr[i] == ']')
-            {
-                StackPop(&p);
-            }
-        }
-    }
-    if(StackEmpty)
-    {
-        return false;
-    }
-    else{
-        return true;
-    }
+    assert(ps);
+    return ps->top;
 }
