@@ -29,7 +29,7 @@ MyCircularQueue* myCircularQueueCreate(int k) {
         return NULL;
     }
     obj->a = (int*)malloc(sizeof(int) * (k + 1));
-    obj->front = obj->rear = 1;
+    obj->front = obj->rear = 0;
     obj->k = k;
     return obj;
 }
@@ -42,7 +42,7 @@ bool myCircularQueueEnQueue(MyCircularQueue* obj, int value) {
     if (myCircularQueueIsFull(obj))
         return false;
 
-    obj->a[(obj->rear +obj-> k) % (obj->k + 1)] = value;
+    obj->a[obj->rear] = value;
 
     obj->rear++;
     obj->rear %= obj->k + 1;
@@ -69,7 +69,7 @@ int myCircularQueueFront(MyCircularQueue* obj) {
         return -1;
     }
     else {
-        return obj->a[(obj->front + obj->k) % (obj->k + 1) - 1];
+        return obj->a[obj->front];
     }
 }
 
@@ -81,13 +81,9 @@ int myCircularQueueRear(MyCircularQueue* obj) {
     {
         return -1;
     }
-    else if(obj->rear == 0 || obj->rear == 1)
-    {
-        return obj->a[(obj->rear + obj->k) % (obj->k + 1 )-1];
-    }
     else
     {
-        return obj->a[obj->rear - 2];
+        return obj->a[(obj->rear + obj->k) % (obj->k + 1)];
     }
 }
 
@@ -129,4 +125,10 @@ int main()
 
     return 0;
 }
+
+//
+//int TreeHeight(BTNode* root)
+//{
+//    
+//}
 
