@@ -1,22 +1,39 @@
-
 #define _CRT_SECURE_NO_WARNINGS 1
 
-void Adjustup(HPDataType* a, int child)
+#include"heap.h"
+
+int main()
 {
-	int parent = (chile - 1) / 2;
-	while (parent>= 0)/////////////
+	Heap hp;
+	hp._a = 0;
+	HeapCreate(&hp,hp._a,4);
+
+	HeapPush(&hp, 12);
+	HeapPush(&hp, 22);
+	HeapPush(&hp, 34);
+	HeapPush(&hp, 134);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+	HeapPush(&hp, 77);
+
+
+	while (!HeapEmpty(&hp))
 	{
-		if (a[parent] < a[chile])
-		{
-			int tmp = a[parent];
-			a[parnet] = a[achild];
-			a[child] = tmp;
-			child = parent;
-			parent = (child - 1) / 2;
-		}
-		else
-		{
-			break;
-		}
+		printf("%d ", HeapTop(&hp));
+		HeapPop(&hp);
 	}
+	printf("\n");
+
+	HeapDestory(&hp);
+
+
+	return 0;
 }
