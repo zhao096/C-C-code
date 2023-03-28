@@ -88,6 +88,10 @@ void HeapCreate(Heap* hp, HPDataType* a, int n)
 	}
 	hp->_capacity = n;
 	hp->_size = 0;
+	for (int i = (n - 2) / 2; i >= 0; i--)
+	{
+		AdjustDown(hp->_a, i, n);
+	}
 }
 
 void HeapDestory(Heap* hp)
@@ -97,7 +101,6 @@ void HeapDestory(Heap* hp)
 	hp->_a = NULL;
 	hp->_capacity = 0;
 	hp->_size = 0;
-	free(hp);
 }
 
 void HeapPush(Heap* hp, HPDataType x)
@@ -151,6 +154,42 @@ bool HeapEmpty(Heap* hp)
 	return hp->_size == 0;
 }
 
+//void PrintTopK(int* a, int n, int k)
+//{
+//
+//}
+void TestTopk()
+{
+	FILE* pf = fopen("test.txt", "w");
+	if (pf == NULL)
+	{
+		perror("fopen");
+		return;
+	}
+	srand((unsigned int)time(0));
+	for (int i = 0; i < 10000; i++)
+	{
+		int s = rand() % 10000;
+		fprintf(pf, "%d\n", s);
+	}
+	fclose(pf);
+
+}
+
+// 二叉树查找值为x的结点
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
+{
+	if (root == NULL)
+		return NULL;
+	if (root->data == x)
+	{
+		return root;
+	}
+	BinaryTreeFind(root + 1, x);
+	BinaryTreeFind(root + 2, x);
+
+
+}
 
 
 
