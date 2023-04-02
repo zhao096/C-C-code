@@ -33,6 +33,7 @@ int main()
 	printf("\n");
 
 	HeapDestory(&hp);
+
 	TestTopk();
 
 	return 0;

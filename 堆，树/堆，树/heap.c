@@ -167,29 +167,45 @@ void TestTopk()
 		return;
 	}
 	srand((unsigned int)time(0));
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 100; i++)
 	{
-		int s = rand() % 10000;
-		fprintf(pf, "%d\n", s);
+		int s = rand() % 1000;
+		fprintf(pf, "%d\n", s);//找最大的前五个
 	}
-	fclose(pf);
 
+	fclose(pf);
+	pf = NULL;
+
+	FILE* pd = fopen("test.txt", "r");
+	if (pd == NULL)
+	{
+		perror("fopen");
+		return;
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		AdjustDown(pd, i,1000);
+	}
+	fclose(pd);
 }
 
 // 二叉树查找值为x的结点
-BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
-{
-	if (root == NULL)
-		return NULL;
-	if (root->data == x)
-	{
-		return root;
-	}
-	BinaryTreeFind(root + 1, x);
-	BinaryTreeFind(root + 2, x);
+//BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
+//{
+//	if (root == NULL)
+//		return NULL;
+//	if (root->data == x)
+//	{
+//		return root;
+//	}
+//	BinaryTreeFind(root + 1, x);
+//	BinaryTreeFind(root + 2, x);
+//}
 
 
-}
+
+
+
 
 
 

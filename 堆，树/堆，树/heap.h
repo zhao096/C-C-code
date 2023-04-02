@@ -40,3 +40,5 @@ void TestTopk();
 
 //向上调整
 void Adjustup(HPDataType* a, int child);
+
+void AdjustDown(HPDataType* a, int child);
