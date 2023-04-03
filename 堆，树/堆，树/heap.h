@@ -35,10 +35,10 @@ bool HeapEmpty(Heap* hp);
 // 需要注意：
 // 找最大的前K个，建立K个数的小堆
 // 找最小的前K个，建立K个数的大堆
-void PrintTopK(int* a, int n, int k);
+void PrintTopK(int n, int k);
 void TestTopk();
 
 //向上调整
 void Adjustup(HPDataType* a, int child);
 
-void AdjustDown(HPDataType* a, int child);
+void AdjustDown(HPDataType* a, int parent, int n);

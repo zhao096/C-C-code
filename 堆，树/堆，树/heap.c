@@ -52,18 +52,19 @@ void Adjustup(HPDataType* a, int child)
 //	}
 //}
 
-void AdjustDown(HPDataType* a, int parent, int n)
+//建小堆
+void AdjustDown(HPDataType* a, int parent, int n)//a数组，parent父亲节点、n元素个数
 {
 	//先把左边的看成大的
 	int child = (parent * 2) + 1;
 	while(child < n)
 	{
-		if (child + 1 < n && a[child] < a[child + 1])
+		if (child + 1 < n && a[child] > a[child + 1])
 		{
 			++child;
 		}
 
-		if(a[child]>a[parent])
+		if(a[child]<a[parent])
 		{
 			Swap(&a[child], &a[parent]);
 			parent = child;
@@ -88,6 +89,7 @@ void HeapCreate(Heap* hp, HPDataType* a, int n)
 	}
 	hp->_capacity = n;
 	hp->_size = 0;
+
 	for (int i = (n - 2) / 2; i >= 0; i--)
 	{
 		AdjustDown(hp->_a, i, n);
@@ -154,10 +156,55 @@ bool HeapEmpty(Heap* hp)
 	return hp->_size == 0;
 }
 
-//void PrintTopK(int* a, int n, int k)
-//{
-//
-//}
+void PrintTopK(int n, int k)
+{
+	FILE* pd = fopen("test.txt", "r");
+
+	//对于树来说他其实是数组，只不过那树来展示
+	//所以我们需要开辟一遍空间
+
+	int* ttopk = (int*)malloc(sizeof(int) * k);
+
+	if (pd == NULL || ttopk == NULL)
+	{
+		perror("PrintTopk");
+		fclose(pd);
+		free(ttopk);
+		return;
+	}
+
+	//从文件中取出元素并且开辟小堆
+
+	for (int i = 0; i < k; i++)
+	{
+		fscanf(pd, "%d", &ttopk[i]);
+	}
+	for (int i = (k - 1 - 1) / 2; i >= 0; i--)
+	{
+		AdjustDown(ttopk, i, k);
+	}
+
+	//将文件中的数据和小堆顶的数据进行比较，如果大于就进去，否则退出
+	int val = 0;
+	int ret = fscanf(pd, "%d",&val);
+	while (ret != EOF)
+	{
+		if (ttopk[0] < val)
+		{
+			Swap(&ttopk[0], &val);
+			AdjustDown(ttopk, 0, k);
+		}
+		ret = fscanf(pd, "%d", &val);
+	}
+
+	for (int i = 0; i < k; i++)
+	{
+		printf("%d\n", ttopk[i]);
+	}
+
+	fclose(pd);
+	free(ttopk);
+}
 void TestTopk()
 {
 	FILE* pf = fopen("test.txt", "w");
@@ -167,27 +214,19 @@ void TestTopk()
 		return;
 	}
 	srand((unsigned int)time(0));
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 100; i++)//生成100个数
 	{
-		int s = rand() % 1000;
-		fprintf(pf, "%d\n", s);//找最大的前五个
+		int s = rand() % 100;
+		fprintf(pf, "%d\n", s);
 	}
 
 	fclose(pf);
 	pf = NULL;
 
-	FILE* pd = fopen("test.txt", "r");
-	if (pd == NULL)
-	{
-		perror("fopen");
-		return;
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		AdjustDown(pd, i,1000);
-	}
-	fclose(pd);
+	PrintTopK(100, 10);//总共100数据，找出最大的前10个
 }
+
+
 
 // 二叉树查找值为x的结点
 //BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
