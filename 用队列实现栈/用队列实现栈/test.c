@@ -115,6 +115,7 @@ typedef struct {
 
 
 MyStack* myStackCreate() {
+	//因为要传递回的类型为指针所以此处直接创建一个指针类型
 	MyStack* sk = (MyStack*)malloc(sizeof(int) * 100);
 	if (sk == NULL)
 	{
