@@ -92,14 +92,39 @@ void HeapSort(int* a, int n)
 
 int main()
 {
-	int arr[10] = { 0 };
-	for (int i = 0; i < 10; i++)
-	{
-		scanf("%d", &arr[i]);
-	}
-	printf("\n");
+	int arr[4] = { 5,2,3,1 };
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	scanf("%d", &arr[i]);
+	//}
+	//printf("\n");
 
 	//¶ÑÅÅĞò
-	HeapSort(arr,10);
+	HeapSort(arr,4);
 	return 0;
 }
+//int main()
+//{
+//	srand((unsigned int)time(0));
+//	//for (int i = 0; i < 100; i++)
+//	//{
+//	//	int r = rand() % 100;
+//	//	arr[i] = r;
+//	//}
+//	//int count = 0;
+//	//SelectSort(arr, 100,&count);
+//	//for (int i = 0; i < 100; i++)
+//	//{
+//	//	printf("%d ", arr[i]);
+//	//}
+//	//printf("\n%d",count);
+//	//ShellSort(arr, 10);
+//	HeapSort(arr, 4);
+//
+//	for (int i = 0; i < 4; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//
+//	return 0;
+//}
