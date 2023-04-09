@@ -1,6 +1,7 @@
  #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<stdlib.h>
+#include<assert.h>
 
 struct Node {
     int val;
@@ -77,57 +78,171 @@ struct Node {
 //     }
 //     return tail_new;
 
-// }
-struct Node* copyRandomList(struct Node* head) {
-    struct Node* cur = head;
-    struct Node* copy = NULL;
+//// }
+//struct Node* copyRandomList(struct Node* head) {
+//    struct Node* cur = head;
+//    struct Node* copy = NULL;
+//
+//    while (cur)
+//    {
+//        copy = (struct Node*)malloc(sizeof(struct Node));
+//        struct Node* next = cur->next;
+//
+//        copy->next = next;
+//        cur->next = copy;
+//
+//        copy->val = cur->val;
+//        copy->random = cur->random;
+//            
+//        cur = copy->next;
+//    }
+//    cur = head;
+//    while (cur)
+//    {
+//        if (cur->next->random != NULL)
+//        {
+//            cur->next->random = cur->random->next;
+//        }
+//        else {
+//            cur->next->random = NULL;
+//        }
+//        cur = cur->next->next;
+//    }
+//    cur = head;
+//
+//    struct Node* copyhead = NULL, *copytail = NULL;
+//    while (cur)
+//    {
+//        struct Node* next = cur->next->next;
+//
+//        if (copyhead == NULL)
+//        {
+//            copytail = copyhead = cur->next;
+//        }
+//        else {
+//            copytail->next = cur->next;
+//            copytail = copytail->next;
+//
+//        }
+//        cur = next;
+//    }
+//    free()
+//    return copyhead;
+//}
+//
+//
+///*
+//// Definition for a Node.
+//class Node {
+//public:
+//    int val;
+//    Node* next;
+//    Node* random;
+//
+//    Node(int _val) {
+//        val = _val;
+//        next = NULL;
+//        random = NULL;
+//    }
+//};
+//*/
+//
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
 
-    while (cur)
-    {
-        copy = (struct Node*)malloc(sizeof(struct Node));
-        struct Node* next = cur->next;
-
-        copy->next = next;
-        cur->next = copy;
-
-        copy->val = cur->val;
-        copy->random = cur->random;
-            
-        cur = copy->next;
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
     }
-    cur = head;
-    while (cur)
-    {
-        if (cur->next->random != NULL)
-        {
-            cur->next->random = cur->random->next;
-        }
-        else {
-            cur->next->random = NULL;
-        }
-        cur = cur->next->next;
-    }
-    cur = head;
+};
+*/
 
-    struct Node* copyhead = NULL, *copytail = NULL;
-    while (cur)
-    {
-        struct Node* next = cur->next->next;
 
-        if (copyhead == NULL)
-        {
-            copytail = copyhead = cur->next;
-        }
-        else {
-            copytail->next = cur->next;
-            copytail = copytail->next;
-
-        }
-        cur = next;
-    }
-    free()
-    return copyhead;
+struct Node* BuyNewNode()
+{
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    assert(ptr);
+    ptr->val = 0;
+    ptr->next = NULL;
+    ptr->random = NULL;
+    return ptr;
 }
+
+struct Node* copyRandomList(struct Node* head)
+{
+    if (head == NULL)
+    {
+        return NULL;
+    }
+    //在两两数据中插入一个新的和cur 一样的数据
+    struct Node* cur = head;
+    struct Node* prev = head->next;
+    while (cur)
+    {
+
+        struct Node* newnode = BuyNewNode();
+
+        newnode->next = prev;
+        newnode->val = cur->val;
+
+        cur->next = newnode;
+
+        cur = prev;
+        if (prev)
+            prev = prev->next;
+    }
+
+    //将插入的新数据的random链接起来
+    cur = head;
+    prev = head->next;
+    while (cur)
+    {
+        if (cur->random)
+        {
+            prev->random = cur->random->next;
+        }
+        else
+        {
+            prev->random = NULL;
+        }
+
+        cur = prev->next;
+
+        if (prev->next)
+            prev = prev->next->next;
+    }
+
+    //将新的和老的链表断开
+    cur = head;
+    prev = head->next;
+    struct Node* ret = prev;
+
+    while (cur)
+    {
+        cur->next = prev->next;
+        cur = prev->next;
+
+        if (cur)
+        {
+            prev->next = cur->next;
+            prev = cur->next;
+        }
+        else
+        {
+            prev->next = NULL;
+        }
+    }
+
+    return ret;
+
+}
+
 
 
 int main()
