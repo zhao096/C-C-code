@@ -234,7 +234,7 @@ void QuickSortNonR(int* a, int left, int right)
 
 	while (!StackEmpty(&sk))
 	{
-		right = StackTop(&sk);
+		right = StackTop(&sk);//
 		StackPop(&sk);
 		left = StackTop(&sk);
 		StackPop(&sk);
