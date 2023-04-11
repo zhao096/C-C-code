@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
+#include"stack.h"
 
 
 void Swap(int* t1, int* t2)
@@ -220,9 +221,39 @@ void quicksort(int* a, int left, int right)
 }
 
 // 快速排序 非递归实现
+//用栈来存区间，通过区间来
+
 void QuickSortNonR(int* a, int left, int right)
 {
+	stack sk;
+	StackInit(&sk);
 
+	StackPush(&sk, left);
+	StackPush(&sk, right);
+
+
+	while (!StackEmpty(&sk))
+	{
+		right = StackTop(&sk);
+		StackPop(&sk);
+		left = StackTop(&sk);
+		StackPop(&sk);
+		int keyi = PartSort3(a,left,right);
+
+		//[left , keyi-1] keyi [keyi+1,right]
+		if (keyi+1 < right)// 先从右边开始入栈，这样就是左边先出栈、keyi + 1 != right 如果等于了说明已经排完了（left <= right）
+		{
+			StackPush(&sk, keyi + 1);
+			StackPush(&sk, right);
+		}
+		if (keyi-1 > left)//小于表示至少有两个数据，等于表示只有一个数据，若大于则表示不存在空间
+		{
+			StackPush(&sk,left);
+			StackPush(&sk, keyi - 1);
+
+		}
+	}
+	StackDestroy(&sk);
 }
 
 int main()
@@ -241,7 +272,7 @@ int main()
 	//}
 	//printf("\n");
 
-	quicksort(arr, 0,9);
+	QuickSortNonR(arr, 0,9);
 
 	for (int i = 0; i < 10; i++)
 	{
