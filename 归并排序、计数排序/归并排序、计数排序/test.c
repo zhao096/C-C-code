@@ -112,7 +112,7 @@ void MergeSortNonR(int* a, int n)
 				}
 				else
 				{
-					tmp[j++] = a[begin1++];
+					tmp[j++] = a[begin1++];///
 				}
 			}
 
