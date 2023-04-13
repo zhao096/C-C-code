@@ -207,7 +207,7 @@ void MergeSortNonR2(int* a, int n)
 		}
 		printf("\n");
 		gap *= 2;
-		memcpy(a, tmp, sizeof(int) * n);
+		memcpy(a, tmp, sizeof(int) * n);//放到循环里面、因为每层弄完后都要进行为后面的归并做出改变
 	}
 
 	free(tmp);
