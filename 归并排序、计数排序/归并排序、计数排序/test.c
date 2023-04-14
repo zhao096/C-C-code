@@ -54,7 +54,7 @@ void _MergeSort(int* a, int begin, int end, int* tmp)
 
 void MergeSort(int* a, int n)
 {
-	int* tmp = (int*)malloc(sizeof(int) * n);
+	int* tmp = (int*)malloc(sizeof(int) * n);//直接开辟了n个大小的空间所以空间复杂度是O N
 		if (tmp == NULL)
 		{
 			perror("malloc");

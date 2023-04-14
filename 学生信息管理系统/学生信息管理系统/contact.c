@@ -45,15 +45,15 @@ void LoadContact(Info_System* pc)
 		//2. 读数据
 		PeoInfo tmp = { 0 };
 		int i = 0;
-		while (fread(&tmp, sizeof(PeoInfo), 1, pf))
+		while (fread(&tmp, sizeof(PeoInfo), 1, pf))//用fread先读到临时变量tmp内
 		{
 			//增容
 			Check_Capacity(pc);
-			pc->Contact[i] = tmp;
-			pc->sz++;
+			pc->Contact[i] = tmp;//把tmp内的文件取进来
+			pc->sz++;//增加人数
 			i++;
 		}
-		fclose(pf);
+		fclose(pf);//关闭文件
 		pf = NULL;
 	}
 }
@@ -346,7 +346,7 @@ void Refresh_Stu_message(Info_System* con)
 	assert(con);
 	con->sz = 0;
 	con->capacity = InitPeo;
-	PeoInfo* ptr = (PeoInfo*)malloc(sizeof(PeoInfo) * InitPeo);
+	PeoInfo* ptr = (PeoInfo*)malloc(sizeof(PeoInfo) * InitPeo);//为学生信息先开辟一定大小的空间
 	if (ptr == NULL)
 	{
 		perror("malloc");
@@ -355,7 +355,6 @@ void Refresh_Stu_message(Info_System* con)
 	con->Contact = ptr;
 	ptr = NULL;
 	memset(con->Contact, 0, sizeof(PeoInfo) * InitPeo);
-
 }
 
 
@@ -368,13 +367,12 @@ void DestroyContact(Info_System* con)
 	con->capacity = 0;
 	con->sz = 0;
 	con = NULL;
-
 }
 
 
 void SaveContact(Info_System* con)
 {
-	FILE* pf = fopen("contact.txt","wb");
+	FILE* pf = fopen("contact.txt","wb");//以写的方法
 	if (pf == NULL)
 	{
 		perror("SaveContact");
@@ -383,10 +381,10 @@ void SaveContact(Info_System* con)
 	int i = 0;
 	for (i = 0; i < con->sz; i++)
 	{
-		fwrite(con->Contact + i, sizeof(PeoInfo), 1, pf);
+		fwrite(con->Contact + i, sizeof(PeoInfo), 1, pf);//将数据一一的从con->contact+i中获取后存进文件pf中
 	}
 	
-	fclose(pf);
+	fclose(pf);//关闭
 	pf = NULL;
 
 }
