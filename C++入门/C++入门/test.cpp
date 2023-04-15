@@ -66,16 +66,49 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+//int main()
+//{
+//	int x = 10;
+//	double d = 11.11;
+//	cout << "hello world" << ' ' << endl;
+//	cin >> x >> d;
+//	cout << x << ' ' << d << endl;
+//
+//	return 0;
+//}
+//
+//void fun(int a = 0)
+//{
+//    cout << a << endl;
+//}
+//
+//int main()
+//{
+//    fun();//当没穿参数的时候用的是缺省参数也就是此时的0
+//    fun(10);//而当传了个参数时，那么a就等于了10
+//    return 0;
+//}
+
+
+
+void fun(int a, int b = 20, int c = 10 )
+{
+    cout << a << endl;
+    cout << b << endl;
+    cout << c << endl << endl;
+} 
+
 int main()
 {
-	int x = 10;
-	double d = 11.11;
-	cout << "hello world" << ' ' << endl;
-	cin >> x >> d;
-	cout << x << ' ' << d << endl;
 
-	return 0;
+    fun();
+    fun(3);
+    fun(3, 2, 1);
+    //fun(3, , 1);
+
+    return 0;
 }
+
 
 
 
