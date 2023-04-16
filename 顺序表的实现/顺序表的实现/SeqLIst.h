@@ -20,9 +20,9 @@ typedef struct SeqList
 void InitSeqList(SeqList * obj);
 void DestorySeqList(SeqList* obj);
 
-void SeqListPush(SeqList* obj,SLDataType x );
+void SeqListBackPush(SeqList* obj,SLDataType x );
 
-void SeqListPop(SeqList* obj);
+void SeqListBackPop(SeqList* obj);
 
 void SeqListPirnt(SeqList* obj);
 

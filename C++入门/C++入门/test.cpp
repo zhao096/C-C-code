@@ -91,24 +91,94 @@ using std::cin;
 
 
 
-void fun(int a, int b = 20, int c = 10 )
-{
-    cout << a << endl;
-    cout << b << endl;
-    cout << c << endl << endl;
-} 
+//void fun(int a, int b = 20, int c = 10 )
+//{
+//    cout << a << endl;
+//    cout << b << endl;
+//    cout << c << endl << endl;
+//} 
+//
+//int main()
+//{
+//
+//    fun();
+//    fun(3);
+//    fun(3, 2, 1);
+//    //fun(3, , 1);
+//
+//    return 0;
+//}
 
+////1.类型不同
+//void fun(int a, int b)
+//{
+//	cout << a << ' ' << b << endl;
+//}
+//void fun(double a, double b)
+//{
+//	cout << a << ' ' << b <<endl;
+//}
+////2.顺序不同
+//void fun(int a, double b)
+//{
+//	cout << a << ' ' << b << endl;
+//}
+//void fun(double a, int b)
+//{
+//	cout << a << ' ' << b << endl;
+//}
+////3. 个数不同
+//void fun(int a, int b , int c)
+//{
+//	cout << a << ' ' << b <<' ' << c << endl;
+//}
+//void fun(int a, int b,int c,int d)
+//{
+//	cout << a << ' ' << b << ' ' << c << ' ' << d << endl;
+//}
+//
+//
+//int main()
+//{
+//	fun(1,1);
+//	fun(1.1, 1.1);
+//
+//	fun(3, 2.2);
+//	fun(2.2, 3);
+//
+//	fun(5, 6, 7);
+//	fun(7, 8, 9,10);
+//
+//
+//	return 0;
+//}
+
+//
+//int main()
+//{
+//	int a = 10;
+//	int& b = a;//b就是a的引用（一个绰号、此时a 、 b 的意义是一样的 ）
+//	cout << a << ' ' << b << endl;
+//	cout << &a << ' ' << &b << endl;//同时指向同一块空间
+//	return 0;
+//}
+
+void Swap(int& a, int& b)
+{
+	int tmp = a;
+	a = b;
+	b = tmp;
+}
 int main()
 {
+	int a = 10; 
+	int b = 20;
+	cout << a << ' ' << b << endl;
 
-    fun();
-    fun(3);
-    fun(3, 2, 1);
-    //fun(3, , 1);
-
-    return 0;
+	Swap(a,b);
+	cout << a << ' ' << b << endl;
+	return 0;
 }
-
 
 
 

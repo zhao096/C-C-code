@@ -31,6 +31,7 @@ char* replaceSpace(char* s) {
         {
             ret[j++] = s[i];
         }
+        ret[j] = '\0';
     }
     return ret;
 }

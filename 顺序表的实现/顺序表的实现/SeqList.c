@@ -44,7 +44,7 @@ void DestorySeqList(SeqList* obj)
 	obj->capacity = obj->size = 0;
 }
 
-void SeqListPush(SeqList* obj, SLDataType x)
+void SeqListBackPush(SeqList* obj, SLDataType x)
 {
 	assert(obj);
 	
@@ -54,7 +54,7 @@ void SeqListPush(SeqList* obj, SLDataType x)
 
 }
 
-void SeqListPop(SeqList* obj)
+void SeqListBackPop(SeqList* obj)
 {
 	assert(obj);
 	assert(obj->size > 0);//为真就过、为假就会报错
