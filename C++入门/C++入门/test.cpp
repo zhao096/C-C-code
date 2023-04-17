@@ -163,20 +163,32 @@ using std::cin;
 //	return 0;
 //}
 
-void Swap(int& a, int& b)
-{
-	int tmp = a;
-	a = b;
-	b = tmp;
-}
+//void Swap(int& a, int& b)
+//{
+//	int tmp = a;
+//	a = b;
+//	b = tmp;
+//}
+//int main()
+//{
+//	int a = 10; 
+//	int b = 20;
+//	cout << a << ' ' << b << endl;
+//
+//	Swap(a,b);
+//	cout << a << ' ' << b << endl;
+//	return 0;
+//}
+
+
 int main()
 {
-	int a = 10; 
-	int b = 20;
-	cout << a << ' ' << b << endl;
+	const int a = 0;
+	int& b = a;
+	
+	int c = 10;
+	const int& d = c;
 
-	Swap(a,b);
-	cout << a << ' ' << b << endl;
 	return 0;
 }
 
