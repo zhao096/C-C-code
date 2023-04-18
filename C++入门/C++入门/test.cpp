@@ -181,13 +181,82 @@ using std::cin;
 //}
 
 
+//int main()
+//{
+//	const int a = 0;
+//	int& b = a;
+//	
+//	int c = 10;
+//	const int& d = c;
+//
+//	return 0;
+//}
+//
+//
+//int main()
+//{
+//	int a = 0;
+//	int& b;
+//
+//
+//	return 0;
+//}
+
+
+
+//typedef struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//}*PNode;
+//
+//void LTPushBack(PNode& phead, int x);
+//
+//int main()
+//{
+//	return 0;
+//}
+
+//
+//int main()
+//{
+//	const int a = 0;
+//	int& b = a;//此时引用的类型相对于引用对象来说升高了，从const int -》int
+//	
+//	int c = 10;
+//	int& d = c;//这种是平移
+//	const int& e = c;//这种就是降低
+//	//注意此时e的类型是const不能被修改,但并不影响c仍然可以被修改
+//	return 0;
+//}
+//
+//int main()
+//{
+//	double d = 1.11;
+//	int& i = d;
+//	const int& i1 = d;
+//}
+//
+//int& fun2()
+//{
+//	static int x = 0;
+//	return x;
+//}
+////此时因为返回值是int& ，所以并不会创建临时变量
+//int main()
+//{
+//	int& ret = fun2();//因为没有创建临时变量所以可以正常使用，也就是 平移
+//	const int& ret1 = fun2();// 缩小
+//	return 0;
+//}
+
 int main()
 {
-	const int a = 0;
+	int a = 0;
+
 	int& b = a;
-	
-	int c = 10;
-	const int& d = c;
+
+	int* p = &a;
 
 	return 0;
 }
