@@ -254,7 +254,7 @@ int main()
 {
 	int a = 0;
 
-	int& b = a;
+	int& b = a;¡¢¡¢
 
 	int* p = &a;
 
