@@ -249,16 +249,69 @@ using std::cin;
 //	const int& ret1 = fun2();// 缩小
 //	return 0;
 //}
+//
+//int main()
+//{
+//	int a = 0;
+//
+//	int& b = a;
+//
+//	int* p = &a;
+//
+//	return 0;
+//}
 
+
+//////           auto 的使用
+
+//
+//void Add(auto a, auto b)
+//{
+//
+//}
 int main()
 {
-	int a = 0;
+    //int x = 10;
+    //auto a = &x;
+    //auto* b = &x;
+    //auto& c = x;
+    //cout << typeid(a).name() << endl;//int *
+    //cout << typeid(b).name() << endl;//int  *
+    //cout << typeid(c).name() << endl;// int 
+    //*a = 20;
+    //*b = 30;
+    //c = 40;
+    //return 0;
 
-	int& b = a;、、
+    ////auto arr[] = { 0,1,2 };
+    //int a = 10;
+    //int b = 20;
+    //Add(a, b);
 
-	int* p = &a;
+    //auto a = 10, b = 20;
+    //auto x = 10, y = 1.1;
 
-	return 0;
+ /*   auto i; */
+
+    int a[] = { 1,2,3,3,4,5,6,7,8,9,10 };
+
+    for (int i = 0; i < sizeof(a) / sizeof(a[0]); i++)
+    {
+        cout << a[i] << ' ';
+    }
+    cout << endl;
+
+    for (int& e : a)
+    {
+        e *= 2;
+    }
+
+    for (auto x : a)
+    {
+        cout << x << ' ';
+
+    }
+    cout << endl;
 }
 
 
