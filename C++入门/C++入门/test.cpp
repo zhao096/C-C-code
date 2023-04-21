@@ -269,8 +269,16 @@ using std::cin;
 //{
 //
 //}
-int main()
-{
+
+//void MulDoble(int a[])
+//{
+//    for (auto x : a)
+//    {
+//        x *= 2;
+//    }
+//}
+//int main()
+//{
     //int x = 10;
     //auto a = &x;
     //auto* b = &x;
@@ -293,26 +301,47 @@ int main()
 
  /*   auto i; */
 
-    int a[] = { 1,2,3,3,4,5,6,7,8,9,10 };
+    //int a[] = { 1,2,3,3,4,5,6,7,8,9,10 };
 
-    for (int i = 0; i < sizeof(a) / sizeof(a[0]); i++)
-    {
-        cout << a[i] << ' ';
-    }
-    cout << endl;
+    //MulDoble(a);
 
-    for (int& e : a)
-    {
-        e *= 2;
-    }
+    //for (int i = 0; i < sizeof(a) / sizeof(a[0]); i++)
+    //{
+    //    cout << a[i] << ' ';
+    //}
+    //cout << endl;
 
-    for (auto x : a)
-    {
-        cout << x << ' ';
+    //for (int& e : a)
+    //{
+    //    e *= 2;
+    //}
 
-    }
-    cout << endl;
+    //for (auto x : a)
+    //{
+    //    cout << x << ' ';
+
+    //}
+    //cout << endl;
+//}
+//
+
+inline int Add(int x, int y)
+{
+    return x + y;
 }
+
+
+int main()
+{
+    for (int i = 0; i < 100; i++)
+    {
+        cout << Add(i, i + 1) << endl;
+    }
+    return 0;
+}
+
+
+
 
 
 
