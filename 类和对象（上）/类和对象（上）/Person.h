@@ -9,13 +9,8 @@ using namespace std;
 class Person
 {
 public:
-	void PersonInit()
-	{
-		scanf("%s", name);
-		scanf("%s", sex);
-		scanf("%d", &age);
-	}
-	void ShowInfo(char name[]);//展示信息
+
+	void ShowInfo();//展示信息
 
 private:
 	char name[10];

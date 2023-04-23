@@ -55,13 +55,13 @@ struct Stack
 
 int main()
 {
-	//Stack sk;
-	//sk.Init(20);
-	//sk.Push(1);
-	//sk.Push(2);
-	//sk.Push(3);
-	//cout << sk.Top() << endl;
-	//sk.Destroy();
+	Stack sk;
+	sk.Init(20); 
+	sk.Push(1);
+	sk.Push(2);
+	sk.Push(3);
+	cout << sk.Top() << endl;
+	sk.Destroy();
 
 	Person p;
 	p.PersonInit();
