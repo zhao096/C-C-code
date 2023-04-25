@@ -104,7 +104,7 @@ public:
 	}
 	void Print()
 	{
-		cout << _year << ' ' << _month << ' ' << _day << endl;
+		cout << this ->_year << ' ' << this->_month << ' ' <<this-> _day << endl;
 	}
 private:
 	int _day;
