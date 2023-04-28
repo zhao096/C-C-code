@@ -45,10 +45,11 @@ void SelectSort(int* a, int n)
 void AjustDown(int* a, int n, int root)
 {
 	//假设左子树是大的
+	//建大堆
 	int leftchild = root * 2 + 1;
 	while (leftchild < n)
 	{
-		if (leftchild + 1 < n && a[leftchild] < a[leftchild + 1])//注意leftchild + 1 < n
+		 if(leftchild + 1 < n && a[leftchild] < a[leftchild + 1])//注意leftchild + 1 < n
 		{
 			leftchild++;
 		}
