@@ -150,7 +150,7 @@ class MyQueue
 	Stack popsk;
 };
 
-class Date 
+class Date
 {
 public:
 	Date()
@@ -168,7 +168,7 @@ public:
 	}
 
 	//拷贝构造 、 构造函数的重载
-	Date(const Date & d)
+	Date(const Date& d)
 	{
 		_year = d._year;
 		_month = d._month;
@@ -200,6 +200,8 @@ int main()
 
 	return 0;
 }
+
+
 
 
 
