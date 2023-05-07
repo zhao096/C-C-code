@@ -2,8 +2,7 @@
 #include<iostream>
 using namespace std;
 #include<assert.h>
-
-
+#include<math.h>
 
 
 class Date
@@ -20,11 +19,18 @@ public:
 
 	Date(int year = 1900, int month = 1, int day = 1)
 	{
-		_year = year;
-		_month = month;
-		_day = day;
+		if (month <= 12 && month > 0 && day <= GetMonthDay(year, month))
+		{
+			_year = year;
+			_month = month;
+			_day = day;
+		}
+		else
+		{
+			cout << "非法日期" << endl;
+			assert(0);
+		}
 	}
-
 	// 拷贝构造函数
 
   // d2(d1)
@@ -47,17 +53,18 @@ public:
 
 	Date& operator=(const Date& d)
 	{
-		this->_year = d._year;
-		_month = d._month;
-		_day = d._day;
+		if (this != &d)//比较地址（比较地址比较简单），减少 d1=d1 这种赋值情况
+		{
+			_year = d._year;
+			_month = d._month;
+			_day = d._day;
+		}
+
 		return *this;
 	}
 
 
-
 	// 析构函数
-
-
 
 	// 日期+=天数
 

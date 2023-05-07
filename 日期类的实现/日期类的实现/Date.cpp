@@ -5,7 +5,7 @@
 int Date::GetMonthDay(int year, int month)
 {
 
-	int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+	static int arr[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };//因为该数组会被经常的调用所以可以直接放到静态区
 	if (month == 2 && year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
 	{
 		return 29;
@@ -23,6 +23,11 @@ int Date::GetMonthDay(int year, int month)
 
 Date& Date::operator+=(int day)
 {
+	if (day < 0)
+	{
+		*this -= (-day);
+		return *this;
+	}
 	_day += day;
 	while(_day > GetMonthDay(_year,_month))
 	{
@@ -45,6 +50,11 @@ Date Date::operator+(int day)
 
 	//此处最后就是用 + 来调用+= 而不是用 += 来调用 +
 	Date tmp(*this);
+	if (day < 0)
+	{
+		tmp -= abs(day);
+		return tmp;
+	}
 	tmp += day;
 	return tmp;
 
@@ -72,7 +82,11 @@ Date Date::operator+(int day)
 
 Date& Date::operator-=(int day)
 {
-	_day -= day;
+	if (day < 0)
+	{
+		*this += (-day);
+		return *this;
+	}
 	while (_day <= 0)
 	{
 		//注意这些应该写在后面
@@ -91,8 +105,15 @@ Date& Date::operator-=(int day)
 
 Date Date::operator-(int day)
 {
+
 	Date tmp(*this);
+	if (day < 0)
+	{	
+		tmp += (-day);
+		return tmp;
+	}
 	tmp -= day;
+
 	return tmp;
 
 }
@@ -128,15 +149,15 @@ Date Date::operator--(int)
 //2022 5 2
 bool Date::operator>(const Date& d)
 {
-	if (_year <= d._year)
+	if (_year < d._year)
 	{
 		return false;
 	}
-	else if (_year == d._year && _month <= d._month)
+	else if (_year == d._year && _month < d._month)
 	{
 		return false;
 	}
-	else if (_year == d._year && _month == d._month && _day <= d._day)
+	else if (_year == d._year && _month == d._month && _day < d._day)
 	{
 		return false;
 	}
@@ -176,12 +197,12 @@ bool Date::operator>=(const Date& d)
 
 bool Date::operator <= (const Date& d)
 {
-	return !(*this >= d);
+	return !(*this > d);
 }
 
 bool Date::operator < (const Date& d)
 {
-	return !(*this > d);
+	return !(*this >= d);
 }
 
 bool Date::operator != (const Date& d)
@@ -206,9 +227,10 @@ int Date::operator-(const Date& d)
 		count++;
 		++Min;
 	}
-
 	return count * tag;
 }
+
+
 
 
 

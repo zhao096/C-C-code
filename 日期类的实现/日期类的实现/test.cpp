@@ -27,6 +27,8 @@ void Test3()
 {
 	Date d1(2020, 5, 5);
 	d1 += 27;
+	
+	//d1.operator+=(27);
 	d1.Print();
 
 
@@ -77,14 +79,21 @@ void Test6()
 void Test7()
 {
 	Date d1(2003, 7, 7);
-	Date d2(2003, 7, 7);
+	Date d2(2004, 9, 7);
 	cout << (d2 - d1) << endl;
+}
+
+
+void Test8()
+{
+	Date d1(2003, 17, 7);
+	(d1 - (100) + (-100) ).Print();
 }
 
 int main()
 {
 
-	Test7();
+	Test3();
 
 
 	return 0;
