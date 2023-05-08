@@ -50,11 +50,11 @@ Date Date::operator+(int day)
 
 	//此处最后就是用 + 来调用+= 而不是用 += 来调用 +
 	Date tmp(*this);
-	if (day < 0)
-	{
-		tmp -= abs(day);
-		return tmp;
-	}
+	//if (day < 0)
+	//{
+	//	tmp -= abs(day);
+	//	return tmp;
+	//}
 	tmp += day;
 	return tmp;
 
@@ -107,11 +107,12 @@ Date Date::operator-(int day)
 {
 
 	Date tmp(*this);
-	if (day < 0)
-	{	
-		tmp += (-day);
-		return tmp;
-	}
+	// -= 行了 就不用再 写下面的了
+	//if (day < 0)
+	//{	
+	//	tmp += (-day);
+	//	return tmp;
+	//}
 	tmp -= day;
 
 	return tmp;
