@@ -30,10 +30,10 @@ void Test3()
 	
 	//d1.operator+=(27);
 	d1.Print();
-
+	
 
 	Date d3(2023, 5, 6);
-	d3 += 100;
+	d3 -= 27;
 	d3.Print();
 
 }
@@ -93,7 +93,7 @@ void Test8()
 int main()
 {
 
-	Test3();
+	Test5();
 
 
 	return 0;
