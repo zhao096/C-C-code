@@ -230,6 +230,23 @@ int Date::operator-(const Date& d)
 }
 
 
+//首先为了可以连续使用 ， 所以要返回 cout &
+//其次因为假如把流插入 写到 类里面的话 就会导致第一个元素肯定被 *this 占用 导致无法 好的使用流插入的
+//对于运算符重载来说，前面的参数占到第一个参数的位置、再后面的参数占后面的位置
+
+
+ostream& operator<<(ostream& out,const Date& d)
+{
+	out << d._year << "年" << d._month << "月" << d._day << "天" << endl;
+	return out;
+}
+
+iostream& operator>>(iostream& in, const Date& d)
+{
+	cin >> d._year >> d._month >> d._day;
+	return in;
+}
+
 
 
 

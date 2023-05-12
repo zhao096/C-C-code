@@ -8,7 +8,10 @@ using namespace std;
 class Date
 
 {
+	friend ostream& operator<<(ostream& out, const Date& d);
+	friend iostream& operator>>(iostream& out, const Date& d);
 
+		
 public:
 
 	// 获取某年某月的天数
