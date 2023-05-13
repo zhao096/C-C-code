@@ -45,7 +45,7 @@ Date& Date::operator+=(int day)
 
 //此处最后就是用 + 来调用+= 而不是用 += 来调用 +
 
-Date Date::operator+(int day)
+Date Date::operator+(int day)const
 {
 	//我们在使用 + 时有时是不需要去改变值的 如  a + 2 ; a 并没有改变
 	Date tmp(*this);//创建一个临时变量
@@ -101,7 +101,7 @@ Date& Date::operator-=(int day)
 	return *this;
 }
 
-Date Date::operator-(int day)
+Date Date::operator-(int day)const
 {
 
 	Date tmp(*this);
@@ -146,7 +146,7 @@ Date Date::operator--(int)//后置
 
 //2022 5 1
 //2022 5 2
-bool Date::operator>(const Date& d)
+bool Date::operator>(const Date& d)const
 {
 	if (_year < d._year)//先判断是否小于，若否则是  等于（继续判断）或 大于（直接结束）
 	{
@@ -166,12 +166,12 @@ bool Date::operator>(const Date& d)
 	}
 }
 
-bool Date::operator==(const Date& d)//简单的判断
+bool Date::operator==(const Date& d)const//简单的判断
 {
 	return (_year == d._year && _month == d._month && _day == d._day);
 }
 
-bool Date::operator>=(const Date& d)
+bool Date::operator>=(const Date& d)const
 {
 	return *this > d || *this == d;
 
@@ -194,22 +194,22 @@ bool Date::operator>=(const Date& d)
 	//}
 }
 
-bool Date::operator <= (const Date& d)
+bool Date::operator <= (const Date& d)const
 {
 	return !(*this > d);
 }
 
-bool Date::operator < (const Date& d)
+bool Date::operator < (const Date& d)const
 {
 	return !(*this >= d);
 }
 
-bool Date::operator != (const Date& d)
+bool Date::operator != (const Date& d)const
 {
 	return !(*this == d);
 }
 
-int Date::operator-(const Date& d)
+int Date::operator-(const Date& d)const
 {
 	int tag = 1;
 	Date Max(*this);//先确立大的为*this
@@ -235,20 +235,21 @@ int Date::operator-(const Date& d)
 //对于运算符重载来说，前面的参数占到第一个参数的位置、再后面的参数占后面的位置
 
 
-ostream& operator<<(ostream& out,const Date& d)
+ostream& operator<<(ostream& out, const Date& d)//返回值是 out 为了可以连续使用
 {
-	out << d._year << "年" << d._month << "月" << d._day << "天" << endl;
+	//ostream是cout的类对象，也是库iostream定义的
+	out << d._year << "年" << d._month << "月" << d._day << "天" << endl;//内部就把out当cout使用即可
 	return out;
 }
 
-iostream& operator>>(iostream& in, const Date& d)
+istream& operator>>(istream& in, Date& d)//同理要返回 istream& 
 {
-	cin >> d._year >> d._month >> d._day;
+	in >> d._year >> d._month >> d._day;//同理 ....
 	return in;
 }
 
 
 
 
-
+	
 

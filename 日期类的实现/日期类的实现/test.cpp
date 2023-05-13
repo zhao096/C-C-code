@@ -90,11 +90,46 @@ void Test8()
 	(d1 - (100) + (-100) ).Print();
 }
 
+void Test9()
+{
+	Date d1(2003, 7, 7);
+	//cout << d1;
+	cin >> d1;
+	cout << d1;
+
+
+}
+
+void Test10()
+{
+	Date d1(2003, 7, 7);
+	
+
+}
+void Test11()
+{
+	Date d1(2003, 7, 7);
+	//cout << d1;
+	d1.Print();
+
+	const Date d2(2004, 9, 7);
+	//d2.Print();
+
+}
+
+void Test12()
+{
+	Date d1(2003, 7, 7);
+
+	const Date d2(2004, 9, 7);
+
+	cout << &d1 << endl;
+	cout << &d2 << endl;
+
+}
+
 int main()
 {
-
-	Test5();
-
-
+	Test12();
 	return 0;
 }
