@@ -97,7 +97,7 @@ public:
 		_capacity = capacity;
 		_size = 0;
 	}
-	Stack(Stack& sk)
+	Stack(const Stack& sk)
 	{
 		_array = (DataType*)malloc(sizeof(DataType) * _size);
 		if (_array == nullptr)
@@ -161,7 +161,14 @@ public:
 	}
 	//对于上面这个构造函数来说，他其实可以直接写成，下面这种带缺省值的就行了
 	Date(int year = 1970, int month = 1, int day = 1)
+		//在构造函数中间写初始列表，若我们自己不写其实操作系统也会默认生成的
+		:_year(year)
+		, _month(month)
+		,_day(day)
+	//下面是赋值构造函数
 	{
+
+
 		_year = year;
 		_month = month;
 		_day = day;
@@ -180,9 +187,11 @@ public:
 		cout << _year << "-" << _month << "-" << _day << endl;
 	}
 private:
-	int _year = 0;
+	int _year = 0;//对于此处加的缺省参数，其本质上就是用来给初始化列表进行初始化的
 	int _month = 0;
 	int _day = 0;
+	
+
 };
 
 
