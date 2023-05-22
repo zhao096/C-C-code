@@ -146,28 +146,86 @@ typedef int DataType;
 //
 //	return 0;
 //}
+//
+//class A
+//{
+//public:
+//	explicit A(int a)
+//	{
+//	}
+//private:
+//	int _a;
+//};
+//
+//int main()
+//{
+//	A a(3);//此处就是构造函数
+//	A a = 3;//而此处本应该是先进行隐式类型转换把int -> A 生成一个临时变量再进行（拷贝）构造
+//	//但其实编译器进行了优化，直接优化成了一步，只进行构造
+//
+//	//为证明是存在隐式类型转换的：
+//	//A& a = 3;
+//	//上面标红是因为，转换出来的临时变量时具有常性的，所以对于引用来说需要用成cont A& 才能接收 常性的引用对象
+//	const A& a = 3;
+//
+//
+//	return 0;
+//}
 
-class A
-{
+//
+//class A
+//{
+//public:
+//	A(int a)
+//	{
+//		_a = a;
+//	}
+//	static int GetB()//一般我们会把这个定义成静态的函数，此时是没有this指针的，指定类域和访问限定符就能进行访问该函数
+//	{
+//		A();
+//		return _b;
+//	}
+//private:
+//	int _a;
+//	static int _b;
+//};
+//int A::_b = 10;
+//
+//int main()
+//{
+//	A a(1);
+//	cout << a.GetB() << endl;
+//	cout << A::GetB() << endl;
+//	return 0;
+//}
+
+
+class A {
 public:
-	explicit A(int a)
+	static A GetStack()
 	{
+		A a;
+		return a;//返回创建的对象
 	}
+	static A* GetHeap()
+	{
+		return new A;//new一个空间给A
+	}
+
 private:
-	int _a;
+	A()
+	{}
+
+private:
+	int _a = 0;
+	int _b = 1;
 };
 
 int main()
 {
-	A a(3);//此处就是构造函数
-	A a = 3;//而此处本应该是先进行隐式类型转换把int -> A 生成一个临时变量再进行（拷贝）构造
-	//但其实编译器进行了优化，直接优化成了一步，只进行构造
-
-	//为证明是存在隐式类型转换的：
-	//A& a = 3;
-	//上面标红是因为，转换出来的临时变量时具有常性的，所以对于引用来说需要用成cont A& 才能接收 常性的引用对象
-	const A& a = 3;
-
-
+	//此时没有别的办法就只能用静态函数
+	//因为构造函数也属于私有的,所以我们不能直接定义一个对象
+	A::GetStack();
+	A::GetHeap();
 	return 0;
 }
