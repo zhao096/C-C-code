@@ -200,32 +200,133 @@ typedef int DataType;
 //}
 
 
-class A {
+//class A {
+//public:
+//	static A GetStack()
+//	{
+//		A a;
+//		return a;//返回创建的对象
+//	}
+//	static A* GetHeap()
+//	{
+//		return new A;//new一个空间给A
+//	}
+//
+//private:
+//	A()
+//	{}
+//
+//private:
+//	int _a = 0;
+//	int _b = 1;
+//};
+//
+//int main()
+//{
+//	//此时没有别的办法就只能用静态函数
+//	//因为构造函数也属于私有的,所以我们不能直接定义一个对象
+//	A::GetStack();
+//	A::GetHeap();
+//	return 0;
+//}
+
+
+
+
+//class A {
+//public:
+//
+//	class B {//此时的B就是A的一个内部类，并且内部类时外部类的友元，可以使用外部类的变量
+//	public:
+//		B()
+//		{
+//		}
+//		void Print(const A& a)//注意也并不是直接就能使用其成员变量，还是需要先实例化一个对象的
+//		{
+//			cout << a._a << a._b << endl; 
+//		}
+//	private:
+//
+//	};
+//
+//private:
+//	int _a;//
+//	int _b;
+//
+//};
+//
+//int main()
+//{
+//	A a;
+//	A::B b;//当是public 时就能在外部定义了
+//	return 0;
+//}	
+
+//class A {
+//public:
+//
+//	class B {//此时的B就是A的一个内部类，并且内部类时外部类的友元，可以使用外部类的变量
+//	public:
+//		B()
+//		{
+//		}
+//		void Print()
+//		{
+//			cout << _a <<_b << endl;//此处对于静态成员来说直接通过A::xxx 就能访问，所以对在A类内的B就能直接使用静态的
+//		}
+//	private:
+//
+//	};
+//
+//private:
+//	static int _a;
+//	static int _b;
+//};
+//
+//int main()
+//{
+//	A a;
+//	A::B b;//当是public 时就能在外部定义了
+//	return 0;
+//}
+
+class A
+{
 public:
-	static A GetStack()
+	A(int a = 0)
+		:_a(a)
 	{
-		A a;
-		return a;//返回创建的对象
+		cout << "A(int a)" << endl;
 	}
-	static A* GetHeap()
+	~A()
 	{
-		return new A;//new一个空间给A
+		cout << "~A()" << endl;
 	}
-
 private:
-	A()
-	{}
-
-private:
-	int _a = 0;
-	int _b = 1;
+	int _a;
 };
-
+class Solution {
+public:
+	int Sum_Solution(int n) {
+		cout << "Sum_Solution" << endl;
+		return n;
+	}
+};
 int main()
 {
-	//此时没有别的办法就只能用静态函数
-	//因为构造函数也属于私有的,所以我们不能直接定义一个对象
-	A::GetStack();
-	A::GetHeap();
+	//A aa1;//正常的构造
+	//A();//匿名对象，生命周期在本行
+
+	//A aa2(2);//正常的构造
+	Solution().Sum_Solution(10);//匿名对象调用其函数，并且此处并不会调用构造函数
+
+	//const A& ra = A();//注意匿名对象具有常性，所以需要在引用前面+const
+	//A aa3(3);//正常的构造
+
+	//A a;
+	//a = 3;
+	//cout << "--------" << endl;
+	//A a1 = 4;
+	
 	return 0;
 }
