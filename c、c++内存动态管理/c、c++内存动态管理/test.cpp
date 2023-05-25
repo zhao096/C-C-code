@@ -83,31 +83,47 @@ using namespace std;
 //}
 
 
+//
+//class A
+//{
+//public:
+//	A(int a = 0)
+//		:_a(a)
+//	{
+//		cout << "A()" << endl;
+//	}
+//
+//	~A()
+//	{
+//		cout << "~A()" << endl;
+//	}
+//private:
+//	int _a;
+//};
+//
+//int main()
+//{
+//	A* ptr1 = new A[3]{ 1,2,3 };
+//	delete[] ptr1;
+//	return 0;
+//}
 
-class A
-{
-public:
-	A(int a = 0)
-		:_a(a)
-	{
-		cout << "A()" << endl;
-	}
 
-	~A()
-	{
-		cout << "~A()" << endl;
-	}
-
-private:
-	int _a;
-};
 
 int main()
 {
-
-
-	A* ptr1 = new A[3]{ 1,2,3 };
-	delete[] ptr1;
-
+	int* ptr = nullptr;
+	try
+	{
+		do
+		{
+			ptr = new int[1024 * 1024];
+			cout << ptr << endl;
+		} while (ptr);
+	}
+	catch (const exception& e )
+	{
+		cout << e.what() << endl;
+	}
 	return 0;
 }
