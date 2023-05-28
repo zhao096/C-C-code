@@ -170,7 +170,7 @@ int main()
 	}
 	cout << endl;
 
-	fun(st);
+	//fun(st);
 	return 0;
 }
 
