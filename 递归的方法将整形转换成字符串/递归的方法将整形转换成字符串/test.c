@@ -1,7 +1,7 @@
  #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
-char arr[4] = { 0 };
 
+char arr[4] = { 0 };
 void exchange(int a, int n)
 {
 	if (a % 10 == 0)
