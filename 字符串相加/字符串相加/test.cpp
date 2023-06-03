@@ -27,14 +27,14 @@ public:
             max = min;
             min = num1;
             l1 = l2;
-            l2 = num1.size();
+            l2 = num1.size()-1;
         }
         else if (l1 == l2 && max < min)
         {
             max = min;
             min = num1;
             l1 = l2;
-            l2 = num1.size();
+            l2 = num1.size()-1;
         }
 
 
