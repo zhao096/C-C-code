@@ -39,10 +39,11 @@ typedef struct Stu {
 	int age;
 } Stu;
 
-int stru_name(const void* e1, const void* e2)
+int stru_name(const void* e1, const void* e2)//当返回的是大于0的值的时候就会进行交换
 {
 	return strcmp(((Stu *)e1)->name, ((Stu*)e2)->name);//强制类型转换的优先级小于->，对此我们还应该加上（）来先将void * 变成 Stu*
 }
+
 //int stru_age(const void* e1, const void* e2)
 //{
 //	return ((Stu*)e1)->age - ((Stu*)e2)->age;
