@@ -12,9 +12,9 @@ typedef int SLDataType;
 
 typedef struct SeqList
 {
-	SLDataType* a;
-	int size;
-	int capacity;
+	SLDataType* a;//用指针的形式来代替数组这样开辟空间更好理解（数组的本质是指针）
+	int size;//元素个数
+	int capacity;//容量
 }SeqList;
 
 void InitSeqList(SeqList * obj);
