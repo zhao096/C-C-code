@@ -12,7 +12,7 @@ void TestSTL1()
 	SListPopBack(&STL);
 
 
-	SListPoqpFront(&STL);
+	SListPopFront(&STL);
 
 	SListNode* ret = SListFind(STL, 2);
 	(ret->data) *= 2;
