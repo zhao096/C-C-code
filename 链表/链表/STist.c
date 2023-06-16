@@ -125,16 +125,36 @@ void SListInsertFront(SListNode** pphead,SListNode* pos, SLDateType x) {//当是在
 }
 
 
+void SListErase(SListNode** pphead,SListNode* pos) {
+	assert(pos);//不用再对*pphead进行检查了因为pos已经间接的检查了*pphead 检查的是是否链表中是否有数据假如没有的话pos也会报错
+	assert(pphead);//判空
+	SListNode* tail = *pphead;
+	if (*pphead == pos)//若是第一个元素
+	{
+		SListPopFront(pphead);//那就直接头删
+	}
+	else
+	{
+		while (tail->next != pos)//找到pos位置的前一个位置
+		{
+			tail = tail->next;
+		}
+		tail->next = pos->next;//将前面位置的next改变成pos位置的next，这样就把pos位置给断开了
+		free(pos);//把pos位置处的空间给释放
+	}
+}
+
+
 void SListEraseAfter(SListNode* pos) {
 	assert(pos);
-	if (pos->next == NULL)
+	if (pos->next == NULL)//注意查看pos位置后面是否还有数据
 	{
-		return;
+		return;//若没有则直接返回了
 	}
 	else {
-		SListNode* del = pos->next;
-		pos->next = pos->next->next;
-		free(del);
+		SListNode* del = pos->next;//记录pos后面的位置
+		pos->next = pos->next->next;//改变链接关系让pos的后面位置指向pos位置后的后面位置
+		free(del);//释放del
 		del = NULL;
 	}
 }
@@ -142,16 +162,16 @@ void SListEraseAfter(SListNode* pos) {
 void SListDestroy(SListNode* plist) {
 	assert(plist);
 
-	SListNode* prev, * tail;
-	prev = plist;
-	tail = plist->next;
-	while (prev)
+	SListNode* prev, * tail;//双指针
+	prev = plist;//指向头
+	tail = plist->next;//指向第二个数据的位置
+	while (prev)//当prve==NULL就不用进循环了也表示释放完了
 	{	
-		free(prev);
-		prev = tail;
-		if(tail != NULL)
-		tail = tail->next;
+		free(prev);//释放prev出的空间
+		prev = tail;//将prve指向tail
+		if(tail != NULL)//判断tail是不是NULL
+			tail = tail->next;//若是NULL就不能再往后了
 	}
-	plist = NULL;
+	plist = NULL;//将没用的指针赋成空指针
 }
 
