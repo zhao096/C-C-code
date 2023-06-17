@@ -16,14 +16,14 @@ SListNode* BuySListNode(SLDateType x) {//接收传进来的数据
 
 void SListPrint(SListNode* phead)
 {
-	SListNode* tail = phead;
+	SListNode* tail = phead;//用一个指针来指向开始
 
-	while (tail != NULL)
+	while (tail != NULL)//只要tail不到NULL都要进群
 	{
-		printf("%d->", tail->data);
-		tail = tail->next;
+		printf("%d->", tail->data);//进来打印tail的date
+		tail = tail->next;//往后走
 	}
-	printf("NULL\n");
+	printf("NULL\n");//打印一下最后的NULL
 }
 
 void SListPushBack(SListNode** pphead, SLDateType x) {//注意此处用二级指针是因为可能要修改结构体变量（或理解成传进来的是一级指针类型为了修改他就需要用二级指针）
