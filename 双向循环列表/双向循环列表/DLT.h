@@ -10,11 +10,12 @@ typedef int LTDataType;
 
 typedef struct ListNode
 {
-	LTDataType data;
-	struct ListNode* next;
-	struct ListNode* prev;
+	LTDataType data;//数据
+	struct ListNode* next;//指向后面的数据
+	struct ListNode* prev;//指向前面的数据
+	//struct ListNode结构体类型，这里要加上struct因为类型重命名是在后面的
 
-}ListNode;
+}ListNode;//typedef类型重命名
 
 // 创建返回链表的头结点.
 ListNode* ListCreate();
