@@ -9,19 +9,18 @@
 	typedef struct stack
 	{
 		datetype* date;
-		int top;
+		int size;
 		int capacity;
 	}stack;
 
 void StackInit(stack* ps);
 void StackDestroy(stack* ps);
 
-
 void StackPush(stack* ,datetype x);
 void StackPop(stack* ps);
-//获取堆顶的数据
+//获取栈顶的数据
 datetype StackTop(stack* ps);
-//获取堆上的个数
+//获取栈上的个数
 int StackSize(stack* ps);
 
 bool StackEmpty(stack* ps);

@@ -15,7 +15,6 @@ int main()
 
 	StackPop(&p);
 
-
 	StackDestroy(&p);
 	return 0;
 }
