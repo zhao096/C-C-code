@@ -32,14 +32,13 @@ using namespace std;
 //     return 0;
 // }
 
-int main()
-{
-    int i = 10;
-    i /= 0;
+// int main()
+// {
+//     int i = 10;
+//     i /= 0;
 
-
-    return 0;
-}
+//     return 0;
+// }
 
 // void handler(int signo)
 // {
@@ -72,3 +71,10 @@ int main()
 //     kill(processpid,signum);//+1跳过-得到数字
 //     return 0;
 // }
+
+
+int main()
+{
+    
+    return 0;
+}
