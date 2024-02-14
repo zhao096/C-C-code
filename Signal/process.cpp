@@ -72,9 +72,80 @@ using namespace std;
 //     return 0;
 // }
 
+void handler(int signo)
+{
+    cout << "signo："<<signo << endl;
+}
+// int main()
+// {
+//     cout << "getpid：" << getpid() << endl;
+//     signal(2,handler);
+//     sigset_t block,oblock;
+
+//     sigemptyset(&block);
+//     sigemptyset(&oblock);
+
+//     for(int signo = 1; signo < 32 ;signo++)
+//     {
+//         sigaddset(&block,signo);
+//     }
+
+//     sigprocmask(SIG_SETMASK,&block,&oblock);//此处才修改了系统的信号屏蔽字
+
+//     cout << "已经屏蔽所有信号" << endl;
+
+//     while(true)
+//     {
+//         sleep(1);
+//     }
+
+//     return 0;
+// }
+void PrintPending(const sigset_t& pending)
+{
+    for(int signo = 31; signo > 0  ;signo--)
+    {
+        if(sigismember(&pending,signo))
+        {
+            cout << "1";
+        }
+        else
+        {
+            cout << "0";
+        }
+    }
+    cout << endl;
+}
 
 int main()
 {
-    
+    signal(2,handler);
+
+    cout << "getpid：" << getpid() << endl;
+    sigset_t set,oset;
+    sigemptyset(&set);
+    sigemptyset(&oset);
+
+    sigaddset(&set,2);
+
+    sigprocmask(SIG_BLOCK,&set,&oset);
+
+    sigset_t pending;
+    int cnt = 0;
+    while(true)
+    {
+        sigpending(&pending);
+        PrintPending(pending);
+
+        sleep(1);
+
+        if(cnt == 5)
+        {
+            cout<< "解除屏蔽" <<endl;
+            sigprocmask(SIG_SETMASK,&oset,nullptr);
+        }
+        cnt++;
+    }
+
     return 0;
 }
