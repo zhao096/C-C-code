@@ -101,51 +101,67 @@ void handler(int signo)
 
 //     return 0;
 // }
-void PrintPending(const sigset_t& pending)
-{
-    for(int signo = 31; signo > 0  ;signo--)
-    {
-        if(sigismember(&pending,signo))
-        {
-            cout << "1";
-        }
-        else
-        {
-            cout << "0";
-        }
-    }
-    cout << endl;
-}
+// void PrintPending(const sigset_t& pending)
+// {
+//     for(int signo = 31; signo > 0  ;signo--)
+//     {
+//         if(sigismember(&pending,signo))
+//         {
+//             cout << "1";
+//         }
+//         else
+//         {
+//             cout << "0";
+//         }
+//     }
+//     cout << endl;
+// }
+
+// int main()
+// {
+//     signal(2,handler);
+
+//     cout << "getpid：" << getpid() << endl;
+//     sigset_t set,oset;
+//     sigemptyset(&set);
+//     sigemptyset(&oset);
+
+//     sigaddset(&set,2);
+
+//     sigprocmask(SIG_BLOCK,&set,&oset);
+
+//     sigset_t pending;
+//     int cnt = 0;
+//     while(true)
+//     {
+//         sigpending(&pending);
+//         PrintPending(pending);
+
+//         sleep(1);
+
+//         if(cnt == 5)
+//         {
+//             cout<< "解除屏蔽" <<endl;
+//             sigprocmask(SIG_SETMASK,&oset,nullptr);
+//         }
+//         cnt++;
+//     }
+
+//     return 0;
+// }
+
+
 
 int main()
 {
-    signal(2,handler);
+    struct sigaction act,oact;
 
-    cout << "getpid：" << getpid() << endl;
-    sigset_t set,oset;
-    sigemptyset(&set);
-    sigemptyset(&oset);
+    act.sa_handler = handler;//修改act的sa_handler
 
-    sigaddset(&set,2);
-
-    sigprocmask(SIG_BLOCK,&set,&oset);
-
-    sigset_t pending;
-    int cnt = 0;
+    sigaction(2,&act,&oact);//对对应signum信号通过act修改handler表
     while(true)
     {
-        sigpending(&pending);
-        PrintPending(pending);
-
         sleep(1);
-
-        if(cnt == 5)
-        {
-            cout<< "解除屏蔽" <<endl;
-            sigprocmask(SIG_SETMASK,&oset,nullptr);
-        }
-        cnt++;
     }
-
     return 0;
 }
