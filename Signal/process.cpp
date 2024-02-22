@@ -72,10 +72,10 @@ using namespace std;
 //     return 0;
 // }
 
-void handler(int signo)
-{
-    cout << "signo："<<signo << endl;
-}
+// void handler(int signo)
+// {
+//     cout << "signo："<<signo << endl;
+// }
 // int main()
 // {
 //     cout << "getpid：" << getpid() << endl;
@@ -105,7 +105,7 @@ void handler(int signo)
 // {
 //     for(int signo = 31; signo > 0  ;signo--)
 //     {
-//         if(sigismember(&pending,signo))
+//         if(sigismember(&pending,signo))//检查signo信号是否在pending位图中
 //         {
 //             cout << "1";
 //         }
@@ -152,16 +152,63 @@ void handler(int signo)
 
 
 
-int main()
+// int main()
+// {
+//     struct sigaction act,oact;
+
+//     act.sa_handler = handler;//修改act的sa_handler
+
+//     sigaction(2,&act,&oact);//对对应signum信号通过act修改handler表
+//     while(true)
+//     {
+//         sleep(1);
+//     }
+//     return 0;
+// }
+
+void Print(const sigset_t& pending)
 {
-    struct sigaction act,oact;
+    for(int signo = 31 ; signo > 0 ;signo--)
+    {
+        if(sigismember(&pending,signo))
+        {
+            cout << "1";
+        }
+        else
+        {
+            cout << "0";
+        }
+    }
+    cout << endl;
+}
 
-    act.sa_handler = handler;//修改act的sa_handler
-
-    sigaction(2,&act,&oact);//对对应signum信号通过act修改handler表
+void handler(int signo)
+{
+    cout << "signo:" << signo << endl;
     while(true)
     {
+        sigset_t pending;
+        sigpending(&pending);//返回得到pending位图
+        Print(pending);
         sleep(1);
     }
+}
+
+
+int main()
+{
+    cout << "getpid：" << getpid() << endl;
+
+    struct sigaction act,oact;
+
+    sigemptyset(&act.sa_mask);
+    sigaddset(&act.sa_mask,3);//对3号信号进行了屏蔽
+    
+    act.sa_handler = handler;//修改act的sa_handler
+
+
+    sigaction(2,&act,&oact);//对对应signum信号通过act修改handler表
+    
+    while(true) sleep(1);
     return 0;
 }
