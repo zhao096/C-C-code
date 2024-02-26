@@ -166,49 +166,68 @@ using namespace std;
 //     return 0;
 // }
 
-void Print(const sigset_t& pending)
-{
-    for(int signo = 31 ; signo > 0 ;signo--)
-    {
-        if(sigismember(&pending,signo))
-        {
-            cout << "1";
-        }
-        else
-        {
-            cout << "0";
-        }
-    }
-    cout << endl;
-}
+// void Print(const sigset_t& pending)
+// {
+//     for(int signo = 31 ; signo > 0 ;signo--)
+//     {
+//         if(sigismember(&pending,signo))
+//         {
+//             cout << "1";
+//         }
+//         else
+//         {
+//             cout << "0";
+//         }
+//     }
+//     cout << endl;
+// }
+
+// void handler(int signo)
+// {
+//     cout << "signo:" << signo << endl;
+//     while(true)
+//     {
+//         sigset_t pending;
+//         sigpending(&pending);//返回得到pending位图
+//         Print(pending);
+//         sleep(1);
+//     }
+// }
+
+
+// int main()
+// {
+//     cout << "getpid：" << getpid() << endl;
+
+//     struct sigaction act,oact;
+
+//     sigemptyset(&act.sa_mask);
+//     sigaddset(&act.sa_mask,3);//对3号信号进行了屏蔽
+    
+//     act.sa_handler = handler;//修改act的sa_handler
+
+
+//     sigaction(2,&act,&oact);//对对应signum信号通过act修改handler表
+    
+//     while(true) sleep(1);
+//     return 0;
+// }
+
+volatile int flag = 0;
 
 void handler(int signo)
 {
     cout << "signo:" << signo << endl;
-    while(true)
-    {
-        sigset_t pending;
-        sigpending(&pending);//返回得到pending位图
-        Print(pending);
-        sleep(1);
-    }
+    flag = 1;
+    cout << "change flag to:" << flag << endl;
 }
-
 
 int main()
 {
-    cout << "getpid：" << getpid() << endl;
-
-    struct sigaction act,oact;
-
-    sigemptyset(&act.sa_mask);
-    sigaddset(&act.sa_mask,3);//对3号信号进行了屏蔽
-    
-    act.sa_handler = handler;//修改act的sa_handler
-
-
-    sigaction(2,&act,&oact);//对对应signum信号通过act修改handler表
-    
-    while(true) sleep(1);
+    signal(2,handler);
+    cout << "getpid：" <<getpid()<< endl;
+    while(!flag);
+    cout << "success quit" << endl;
     return 0;
 }
+
