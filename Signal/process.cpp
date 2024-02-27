@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string>
+
+#include<sys/wait.h>
+
 using namespace std;
 
 //argc表示字符串的数量 argc = 1 + 用户输入的字符串数目
@@ -213,21 +216,91 @@ using namespace std;
 //     return 0;
 // }
 
-volatile int flag = 0;
+// volatile int flag = 0;
 
-void handler(int signo)
+// void handler(int signo)
+// {
+//     cout << "signo:" << signo << endl;
+//     flag = 1;
+//     cout << "change flag to:" << flag << endl;
+// }
+
+// int main()
+// {
+//     signal(2,handler);
+//     cout << "getpid：" <<getpid()<< endl;
+//     while(!flag);
+//     cout << "success quit" << endl;
+//     return 0;
+// }    
+
+
+// void handler(int signo)
+// {
+//     cout << "signo:" << signo << endl;
+
+//     pid_t id;
+//     while(id = waitpid(-1,nullptr,WNOHANG))//-1接收所有子进程，WNOHANG非阻塞，返回<=0表示等待不成功
+//     {
+//         if(id <= 0) break;
+//         cout << "回收进程：" << id << endl;
+//     }
+// }
+
+// int main()
+// {
+//     signal(SIGCHLD,SIG_IGN);//Linux支持手动忽略SIGCHLD，后来所有子进程都不要父进程等待了，退出会自动回收
+    
+//     for(int i = 0; i < 10;i++)
+//     {
+//         pid_t id= fork();
+//         if(id == 0)
+//         {
+//             //子进程
+//             // sleep(5);
+//             exit(1);
+//         }
+//     }
+
+//     int cnt = 10;
+//     // while(cnt--)
+//     // {
+//     //     cout << cnt << endl;
+//     //     sleep(1);
+//     // }
+//     while(true);
+//     wait(NULL);
+
+//     return 0;
+// }
+
+#include<pthread.h>
+//新线程
+void *ThreadRoutine(void* arg)
 {
-    cout << "signo:" << signo << endl;
-    flag = 1;
-    cout << "change flag to:" << flag << endl;
+    const char* threadname = (const char*)arg;
+    while(true)
+    {
+        cout << "I am a new thread" << threadname << ", pid:" << getpid() << endl;
+        sleep(1);
+    }
 }
-
 int main()
 {
-    signal(2,handler);
-    cout << "getpid：" <<getpid()<< endl;
-    while(!flag);
-    cout << "success quit" << endl;
+    //执行线程前已经有进程了！
+    pthread_t tid;
+    pthread_create(&tid,nullptr,ThreadRoutine,(void*)"thread 1");
+    //thread 线程tid，atttr 设置的线程属性，
+    //start_routine 函数指针（传一个函数）
+    //arg前面函数指针的参数
+
+    //主线程，线程执行的同时 主线程会继续往后执行！
+
+    while(true)
+    {
+        cout << "I am main thread" << ", pid:" << getpid()<< endl;
+        sleep(1);
+    }
     return 0;
 }
 

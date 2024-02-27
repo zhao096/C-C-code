@@ -1,5 +1,5 @@
 process:process.cpp
-	g++ -o $@ $^ -O1 -std=c++11 -g
+	g++ -o $@ $^ -std=c++11 -lpthread
 
 .PHNOY:clean
 clean:
