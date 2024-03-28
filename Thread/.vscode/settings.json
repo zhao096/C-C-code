@@ -5,7 +5,8 @@
         "functional": "cpp",
         "new": "cpp",
         "ostream": "cpp",
-        "ctime": "cpp"
+        "ctime": "cpp",
+        "cstdarg": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

@@ -1,5 +1,7 @@
 #include"RingQueue.hpp"
 #include"Task.hpp"
+#include"Log.hpp"
+
 
 const string opers = "+-*/%&()";
 
@@ -8,7 +10,7 @@ void* Productor(void * args)
     // sleep(5);//先生产，消费者就会先等待，当生产后就会开始消费
     RingQueue<Task> * rq = static_cast<RingQueue<Task> *>(args);
     while(true)
-    {
+    {   
         int data1 = rand() % 10;
         usleep(rand() % 100);
         int data2 = rand() % 10;//去10以内的随机数
@@ -45,21 +47,25 @@ void* Consumer(void * args)
 int main()
 {
     //单生产，单消费：321
+    Log log;
+    log.LogMessage(Debug,"hello %d %s %f",10,"bite,3.14");
 
-    srand((uint16_t)time(nullptr) ^ getpid() ^ pthread_self());//产生随机数
-    pthread_t c[3], p[2];
 
-    RingQueue<Task>* rq = new RingQueue<Task>();
+
+    // srand((uint16_t)time(nullptr) ^ getpid() ^ pthread_self());//产生随机数
+    // pthread_t c[3], p[2];
+
+    // RingQueue<Task>* rq = new RingQueue<Task>();
     
-    pthread_create(&p[0],nullptr,Productor,rq);
-    pthread_create(&p[1],nullptr,Productor,rq);
-    pthread_create(&c[0],nullptr,Consumer,rq);
-    pthread_create(&c[1],nullptr,Consumer,rq);
-    pthread_create(&c[2],nullptr,Consumer,rq);
+    // pthread_create(&p[0],nullptr,Productor,rq);
+    // pthread_create(&p[1],nullptr,Productor,rq);
+    // pthread_create(&c[0],nullptr,Consumer,rq);
+    // pthread_create(&c[1],nullptr,Consumer,rq);
+    // pthread_create(&c[2],nullptr,Consumer,rq);
 
-    pthread_join(p[0],nullptr);
-    pthread_join(p[1],nullptr);
-    pthread_join(c[0],nullptr);
-    pthread_join(c[1],nullptr);
-    pthread_join(c[2],nullptr);
+    // pthread_join(p[0],nullptr);
+    // pthread_join(p[1],nullptr);
+    // pthread_join(c[0],nullptr);
+    // pthread_join(c[1],nullptr);
+    // pthread_join(c[2],nullptr);
 }
