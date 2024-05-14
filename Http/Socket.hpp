@@ -39,11 +39,13 @@ public:
     virtual void CloseFd() = 0;
     virtual bool Recv(string* buffer, int size) = 0;
     virtual bool Send(string& buffer) = 0;
+    virtual void ReUseAddr() = 0;
 public:
 
     void BuildListenSocketMethod(uint16_t port,int backlog)
     {
         GreateSocket();
+        ReUseAddr();
         BindSocketOrDie(port);  
         ListenSocketOrDie(backlog);
     }    
@@ -165,7 +167,13 @@ public:
         send(_sockfd,buffer.c_str(),buffer.size(),0);
         return true;
     }
-    
+
+    void ReUseAddr()override//套接字复用
+    {
+        int opt = 1;
+        setsockopt(_sockfd,SOL_SOCKET,SO_REUSEADDR,&opt,sizeof(opt));
+    }
+
 private:
     int _sockfd;
 };

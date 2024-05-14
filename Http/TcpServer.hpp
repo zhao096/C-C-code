@@ -35,6 +35,7 @@ public:
         ThreadData *td = static_cast<ThreadData *>(argv);
         string http_request;
 
+
         if (td->_sockp->Recv(&http_request, 4096))
         {
             // 处理报文数据，对获取数据进行反序列化处理后得到结果，再序列化发送回去
@@ -42,10 +43,10 @@ public:
             // 读发送数据，不关心数据，只进行发送
             if (!http_responce.empty())
             {
+
                 td->_sockp->Send(http_responce);
             }
         }
-
         td->_sockp->CloseFd();
         delete td->_sockp;
         delete td;
@@ -64,7 +65,7 @@ public:
                 cout << "AcceptConnection fail";
                 continue;
             }
-            cout << "获取一个新连接,sockfd:" << newsock->GetSockfd() << " client info:" << peerip << ":" << peerport;
+            cout << "获取一个新连接,sockfd:" << newsock->GetSockfd() << " client info:" << peerip << ":" << peerport << endl;
             pthread_t tid;
             ThreadData *td = new ThreadData(this, newsock);
             pthread_create(&tid, nullptr, PhreadRun, td);
