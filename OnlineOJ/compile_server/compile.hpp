@@ -35,13 +35,14 @@ namespace ns_compile
                 //将错误信息存储到自己的错误文件中，使用dp2将标准错误 重定向到自己的文件
                 //1. 打开一个自己的文件
 
-                int _stderr = open(PathUtil::Stderr(filename).c_str(),O_CREAT | O_WRONLY,0644);
+                umask(0);//将掩码设置为0，这样设置 出来的权限是相对准确的不会受平台的影响
+                int _stderr = open(PathUtil::CompileErrer(filename).c_str(),O_CREAT | O_WRONLY,0644);
                 //O_CREAT 若欲打开的文件不存在则自动建立该文件.
                 //O_WRONLY 以只写方式打开文件
                 //默认权限0644
                 if(_stderr < 0)//打开失败
                 {
-                    LOG(WARNING) << "没有成功形成stderr文件 " << "\n";
+                    LOG(WARNING) << "没有成功形成CompileErrer文件 " << "\n";
                     exit(1);
                 }
                 //2. 使用dp2将标准错误 重定向到自己的文件
@@ -63,7 +64,6 @@ namespace ns_compile
                 waitpid(pid,nullptr,0);
                 if(FileUtil::IfFileExists(PathUtil::Exe(filename)))//检查是否生成可执行程序
                 {
-
                     LOG(INFO) <<  PathUtil::Src(filename) << "编译成功" << "\n";
                     return true;
                 }

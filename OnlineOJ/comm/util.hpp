@@ -22,6 +22,7 @@ namespace ns_util
             return ret;
         }
         public:
+        //编译时用：
         static std::string Src(const std::string& filename)
         {
             return AddSuffix(filename,".cpp");
@@ -29,6 +30,21 @@ namespace ns_util
         static std::string Exe(const std::string& filename)
         {
             return AddSuffix(filename,".exe");
+        }
+        static std::string CompileErrer(const std::string& filename)
+        {
+            return AddSuffix(filename,".compile_error");
+        }
+
+
+        //运行时用：
+        static std::string Stdin(const std::string& filename)
+        {
+            return AddSuffix(filename,".stdin");
+        }
+        static std::string Stdout(const std::string& filename)
+        {
+            return AddSuffix(filename,".stdout");
         }
         static std::string Stderr(const std::string& filename)
         {
@@ -45,14 +61,12 @@ namespace ns_util
             //On success, zero is returned.  On error, -1 is returned, and  errno is set appropriately.
             struct stat st;
             // return stat(PathUtil::Stderr(filename).c_str(),&st) == 0 ? true : false;
-            if(stat(path_name.c_str(),&st) == 0)
+            if(stat(pathname.c_str(),&st) == 0)
             {
                 //获取属性成功,就表示文件存在了
                 return true;
             }
             return false;
-
-
         }
     };
 
