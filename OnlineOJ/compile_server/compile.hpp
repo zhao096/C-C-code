@@ -18,7 +18,7 @@ using namespace ns_log;
 
 namespace ns_compile
 {
-    class compile
+    class Compiler
     {
     public:
         static bool Compile(const std::string& filename)

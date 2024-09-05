@@ -1,0 +1,4 @@
+./temp/1725498148529_0.cpp: In function ‘int main()’:
+./temp/1725498148529_0.cpp:8:9: error: expected initializer before ‘return’
+    8 |         return 0;
+      |         ^~~~~~

@@ -13,6 +13,10 @@
 // #include <sys/types.h>
 #include <sys/wait.h>
 
+//setrlimit的头文件
+#include <sys/time.h>
+#include <sys/resource.h>
+
 namespace ns_runner{
 
 
@@ -25,7 +29,30 @@ namespace ns_runner{
             Runner(){}
             ~Runner(){}
         public:
-            static int Run(const std::string& file_name)
+            static void SetProcLimit(int cpu_limit,int mem_limit)
+            {
+                //CPU资源的限制/时间
+                struct rlimit _cpu_limit;
+                _cpu_limit.rlim_cur = cpu_limit;
+                _cpu_limit.rlim_max = RLIM_INFINITY;
+                setrlimit(RLIMIT_CPU,&_cpu_limit);
+
+                //内存资源大小的限制
+                struct rlimit _mem_limit;
+                _mem_limit.rlim_cur = mem_limit * 1024;//（转换成MB）
+                _mem_limit.rlim_max = RLIM_INFINITY;
+                setrlimit(RLIMIT_AS,&_mem_limit);
+            }
+            /**************************************
+            *
+            *	返回值 > 0 异常了，退出是收到了信号，返回值就表示对应的信号编号
+	        *   返回值 == 0 正常 运行完毕，结果存到了临时文件中（是否跑过由oj测试用例决定）
+	        *   返回值 < 0 内部错误（打开文件...失败）
+            *   
+            *   cpu_limt: 运行程序所占的最大CPU
+            *   mem_limt: 运行程序所占的最大内存（KB）  
+            *********************************/
+            static int Run(const std::string& file_name,int cpu_limit,int mem_limit)
             {
                 std::string _execute = PathUtil::Exe(file_name);//获取之前生成的可执行程序，来用来运行
                 
@@ -67,6 +94,7 @@ namespace ns_runner{
                     dup2(_stdout_fd,1);
                     dup2(_stderr_fd,2);
 
+                    SetProcLimit(cpu_limit,mem_limit);
                     //执行可执行程序
                     execl(_execute.c_str(),_execute.c_str(),nullptr);//execl(path,参数)
                     exit(1);//若执行失败直接终止程序
@@ -80,7 +108,7 @@ namespace ns_runner{
                     waitpid(pid,&status,0);
 
                     LOG(INFO) << "运行完毕,info:" << (status & 0x7F) << "\n"; 
-                    return status & 0x7F;
+                    return (status & 0x7F);
                 }
             }
 

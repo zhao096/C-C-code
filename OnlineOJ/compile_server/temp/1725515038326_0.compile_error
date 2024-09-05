@@ -1,0 +1,4 @@
+./temp/1725515038326_0.cpp: In function ‘int main()’:
+./temp/1725515038326_0.cpp:7:46: error: expected ‘,’ or ‘;’ before ‘]’ token
+    7 |         int *arr = new int[ 1024 * 1024 * 50]];
+      |                                              ^
