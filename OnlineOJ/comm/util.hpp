@@ -142,5 +142,24 @@ namespace ns_util
     };
 
 
+    class StringUtil
+    {
+        public:
+        static void SplitString(const std::string& str,std::vector<std::string> *target,const std::string& sep)
+        {
+            int left = 0, r = 0;
+            for(r = 1; r < str.size() ;r++){
+                if(str[r] == *sep.c_str()){
+                    target->push_back(str.substr(left,r-left));
+                    left = r + 1;
+                }
+            }
+            target->push_back(str.substr(left,r-left));
+        }
+    };
+
 
 } // namespace ns_util
+
+
+
