@@ -1,12 +1,16 @@
+#pragma once
+
 #include <iostream>
 #include <unordered_map>
 #include <fstream>
 #include <vector>
 #include <cassert>
 #include "../comm/util.hpp"
+#include "../comm/Log.hpp"
 namespace ns_model
 {
     using namespace ns_util;
+    using namespace ns_log;
 
     struct  Question
     {
@@ -22,6 +26,7 @@ namespace ns_model
     
     const std::string& question_list_path = "./questions/questions.list";
     const std::string& question_path = "./questions";
+
     class Model
     {
     private:
@@ -33,7 +38,7 @@ namespace ns_model
         ~Model();
 
         //获取所有题目
-        static bool GetAllQuestions(std::vector<Question>* out)
+        bool GetAllQuestions(std::vector<Question>* out)
         {
             if(questions.size())
             {
@@ -43,21 +48,23 @@ namespace ns_model
                 }
                 return true;
             }
+            LOG(ERROR) <<  "获取所有题目失败" << "\n";
             return false;
         }
 
         //获得某一题
-        static bool GetOneQuestion(const std::string& number,Question* q)
+        bool GetOneQuestion(const std::string& number,Question* q)
         {
             auto k = questions.find(number);
             if(k != questions.end()){
                 (*q) = (k->second);
                 return true;
             }
+            LOG(ERROR) << "获取部分题目失败，题号为:" << number << "\n";
             return false;
         }
 
-        static bool LoadQuestionList(const std::string& question_list)
+        bool LoadQuestionList(const std::string& question_list)
         {
             std::ifstream in(question_list);//从question_list中 通过题号得知共用多少题，
             //并且将每一题的信息填进map中，通过文件获取 基础信息 和 desc题目描述，header默认代码，tail测试用例
@@ -66,6 +73,7 @@ namespace ns_model
             if(!in.is_open())
             {
                 return false;
+                LOG(FATAL) << "加载题库失败，请检查是否存在题库文件" << "\n";
             }
 
             std::string line;
@@ -76,7 +84,8 @@ namespace ns_model
                 StringUtil::SplitString(line,&target," ");
                 if(target.size() != 5)//属性一定是5个
                 {
-                    continue;;
+                    LOG(WARNING) << "加载部分题目失败，请检查questions文件内储存格式" <<  "\n";
+                    continue;
                 }
                 //1   回文数 简单 ./question/1 1 30000
                 q.number = target[0];
@@ -94,6 +103,7 @@ namespace ns_model
                 questions.insert({q.number,q});
             }
             in.close();
+            LOG(INFN) << "加载题库成功" <<  "\n";
         }
     
     };

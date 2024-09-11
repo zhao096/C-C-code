@@ -13,6 +13,9 @@
 //文件流头文件
 #include <fstream>
 
+//boost头文件：
+#include <boost/algorithm/string.hpp>
+
 namespace ns_util
 {
     class TimeUtil{
@@ -147,14 +150,20 @@ namespace ns_util
         public:
         static void SplitString(const std::string& str,std::vector<std::string> *target,const std::string& sep)
         {
-            int left = 0, r = 0;
-            for(r = 1; r < str.size() ;r++){
-                if(str[r] == *sep.c_str()){
-                    target->push_back(str.substr(left,r-left));
-                    left = r + 1;
-                }
-            }
-            target->push_back(str.substr(left,r-left));
+            // int left = 0, r = 0;
+            // for(r = 1; r < str.size() ;r++){
+            //     if(str[r] == *sep.c_str()){
+            //         target->push_back(str.substr(left,r-left));
+            //         left = r + 1;
+            //     }
+            // }
+            //可以使用find找到sep的位置然后再substr
+
+            // target->push_back(str.substr(left,r-left));
+
+            //使用boot可以来切分字符串 
+            boost::split(*target,str,boost::is_any_of(" "),boost::algorithm::token_compress_off);
+
         }
     };
 
