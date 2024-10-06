@@ -162,7 +162,7 @@ namespace ns_util
             // target->push_back(str.substr(left,r-left));
 
             //使用boot可以来切分字符串 
-            boost::split(*target,str,boost::is_any_of(" "),boost::algorithm::token_compress_off);
+            boost::split(*target,str,boost::is_any_of(sep),boost::algorithm::token_compress_off);
 
         }
     };

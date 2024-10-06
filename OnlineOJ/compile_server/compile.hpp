@@ -54,7 +54,7 @@ namespace ns_compile
                 //2. 在excelp中前还需要先把文件名进行处理！ 
                 //      对此就需要新在comm中写一个utile库！并创建对路径处理的类 把给的文件名 变成 加路径和后缀的！
                 execlp("g++","g++","-o",PathUtil::Exe(filename).c_str(),\
-                PathUtil::Src(filename).c_str(),"-std=c++11",nullptr);
+                PathUtil::Src(filename).c_str(),"-D","COMPILER_ONLINE","-std=c++11",nullptr);
 
                 LOG(ERROR) << "启动编译器g++失败，可能是参数错误" << "\n";
                 exit(2);

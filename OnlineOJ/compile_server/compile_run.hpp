@@ -90,7 +90,7 @@ namespace  ns_compile_and_run
             }
             /*
             *
-            *in_json：获取的数据 {{"code","..."}, {"cpu_limit",""},{}}
+            *in_json：获取的数据 code / input / cpu_limit / mem_limit
             *out_json：输出的结果
             */
             static void Start(const std::string& in_json, std::string* out_json)//compile_server给到Start，json序列，并且输出给回到compile_server

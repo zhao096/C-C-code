@@ -1,0 +1,43 @@
+./temp/1727246394851_0.cpp:8:1: error: stray ‘\346’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      | ^
+./temp/1727246394851_0.cpp:8:2: error: stray ‘\211’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |  ^
+./temp/1727246394851_0.cpp:8:3: error: stray ‘\276’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |   ^
+./temp/1727246394851_0.cpp:8:4: error: stray ‘\346’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |    ^
+./temp/1727246394851_0.cpp:8:5: error: stray ‘\234’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |     ^
+./temp/1727246394851_0.cpp:8:6: error: stray ‘\200’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |      ^
+./temp/1727246394851_0.cpp:8:7: error: stray ‘\345’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |       ^
+./temp/1727246394851_0.cpp:8:8: error: stray ‘\244’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |        ^
+./temp/1727246394851_0.cpp:8:9: error: stray ‘\247’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |         ^
+./temp/1727246394851_0.cpp:8:10: error: stray ‘\345’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |          ^
+./temp/1727246394851_0.cpp:8:11: error: stray ‘\200’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |           ^
+./temp/1727246394851_0.cpp:8:12: error: stray ‘\274’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |            ^
+./temp/1727246394851_0.cpp:8:13: error: stray ‘#’ in program
+    8 | 找最大值#ifndef COMPILER_ONLINE
+      |             ^
+./temp/1727246394851_0.cpp:9:10: fatal error: header.cpp: No such file or directory
+    9 | #include "header.cpp"
+      |          ^~~~~~~~~~~~
+compilation terminated.

@@ -106,7 +106,8 @@ int main(int argc,char* argv[])
     //     resp.set_content("hello httplib,你好 httplib!", "text/plain;charset=utf-8");
     // });
 
-    svr.Post("/compile_server",[](const Request& req,Response& resp){
+//当用户访问 /compile_run 这个网址时就会，做出响应set_content
+    svr.Post("/compile_run",[](const Request& req,Response& resp){
         std::string out_json;
         std::string in_json = req.body;
         if(!in_json.empty()){
